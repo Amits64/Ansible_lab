@@ -1,0 +1,13 @@
+---
+- name: Repeated tasks can be written as standard loops
+  hosts: all
+  become: true
+  tasks:
+  - name: Add several users
+    user:
+     name: "{{ item }}"
+     state: present
+     groups: "wheel"
+    loop:
+     - testuser1
+     - testuser2

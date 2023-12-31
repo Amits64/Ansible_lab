@@ -1,0 +1,43 @@
+---
+- hosts: all
+  become: yes
+  ignore_errors: yes
+  tasks:
+   - name: check if nginx package is installed or not
+     command: dpkg -l nginx
+     register: checkPackage
+
+   - name: print json output
+     debug:
+      var: checkPackage
+      
+   - name: nginx package is not installed
+     debug:
+      msg: "nginx package is not installed"
+     when: checkPackage.stdout == ""
+
+   - name: nginx package has beenen installed
+     debug: 
+      msg: "nginx package is installed"
+     when: checkPackage.stdout != ""
+
+   - name: Install nginx if not installed
+     apt:
+      name: nginx
+      state: latest
+     when: checkPackage.stdout == ""
+
+   - name: Check if nginx service is started or not
+     command: systemctl is-active nginx
+     register: checkService
+
+   - name: print output in json format
+     debug:
+      var: checkService
+
+   - name: start the nginx service if not started
+     service:
+      name: nginx
+      state: started
+      enabled: yes
+     when: checkService.stdout == "inactive"

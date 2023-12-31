@@ -1,0 +1,13 @@
+---
+- name: If you have a list of hashes, you can reference subkeys in a loop
+  hosts: all
+  become: true
+  tasks:
+  - name: Add several users
+    user:
+     name: "{{ item.name }}"
+     state: present
+     groups: "{{ item.groups }}"
+    loop:
+     - { name: 'testuser1', groups: 'wheel' }
+     - { name: 'testuser2', groups: 'root' }

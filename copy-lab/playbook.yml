@@ -1,0 +1,14 @@
+---
+- name: Copy file with owner & permission
+  hosts: all
+  become: yes
+  tasks:
+   - name: Create a file with some content
+     copy:
+      content: "I am Superman"
+      dest: /root/test2.txt
+   - name: Copy the file within client machine itself
+     copy:
+      src: /root/test2.txt
+      dest: /root/aa/test.{{ansible_date_time.date}}.txt
+      remote_src: yes

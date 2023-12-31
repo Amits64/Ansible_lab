@@ -1,0 +1,54 @@
+---
+- name: Check Apache (httpd) package and service status
+  hosts: prod,dev
+  tasks:
+    - name: Check if Apache2 package is installed
+      command: dpkg -l | grep apache2
+      register: checkpackage
+      changed_when: false
+      ignore_errors: true
+
+    - name: Display package in JSON format
+      debug:
+        var: checkpackage.stdout
+
+    - name: Print if Apache2 package is not installed
+      debug:
+        msg: "Apache2 package is not installed"
+      when: checkpackage.rc != 0
+
+    - name: Print if Apache2 package is installed
+      debug:
+        msg: "Apache2 package is installed"
+      when: checkpackage.rc == 0
+
+    - name: Install Apache2 if not installed
+      apt:
+        name: apache2
+        state: present
+      when: checkpackage.rc != 0
+
+    - name: Check Apache2 service status
+      command: systemctl is-active apache2
+      register: checkservicestatus
+      ignore_errors: true
+
+    - name: Display service status
+      debug:
+        var: checkservicestatus.stdout
+
+    - name: Print if Apache2 service is not running
+      debug:
+        msg: "Apache2 service is not running"
+      when: checkservicestatus.rc != 0
+
+    - name: Print if Apache2 service is running
+      debug:
+        msg: "Apache2 service is running"
+      when: checkservicestatus.rc == 0
+
+    - name: Start Apache2 service if package installed but service stopped
+      service:
+        name: apache2
+        state: started
+      when: checkpackage.rc == 0 and checkservicestatus.rc != 0

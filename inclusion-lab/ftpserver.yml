@@ -1,0 +1,32 @@
+---
+- hosts: all
+  become: true
+  remote_user: ansible
+  vars:
+    users: alice
+  vars_files:
+    - packagelist.yml
+  tasks:
+    - name: Create users in ubuntu-server2
+      user: 
+        name: "{{ users }}"
+        state: present   
+      when: ansible_hostname == 'ubuntu-server2'
+
+    - name: Install {{ package }} in ubuntu-server1
+      apt:
+        name: "{{ package }}" 
+        state: latest
+      when: ansible_hostname == 'ubuntu-server1'
+
+    - name: include vars file
+      include_vars:
+        file: service.yaml
+
+    - name: start service in ubuntu-server1
+      service:
+        name: "{{ svc }}"
+        state: started
+      when: ansible_hostname == 'ubuntu-server1'
+
+    - include: nginx.yaml

@@ -1,0 +1,17 @@
+- name: Ansible Block Example Playbook
+  hosts: dev
+  tasks:
+   - name: Install, configure, and start Nginx
+     block:
+       - name: Install nginx and memcached
+         apt:
+           name:
+            - nginx
+            - memcached
+           state: present
+       - name: Start service nginx and enable it
+         service:
+           name: nginx
+           state: started
+           enabled: True
+         when: ansible_facts['distribution'] == 'Ubuntu'

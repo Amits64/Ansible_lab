@@ -1,0 +1,5 @@
+[prod]
+ubuntu-server1
+
+[dev]
+ubuntu-server2

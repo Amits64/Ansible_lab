@@ -1,0 +1,22 @@
+---
+- name: Install ex407-server package
+  hosts: dev
+  ignore_errors: yes
+  tasks:
+   - name: Install ex407-server package
+     apt:
+      name: ex407-server
+      state: latest
+     register: ex407server
+     
+   - name: print json output
+     debug:
+      var: ex407server
+
+   - name: print installation is failed
+     debug:
+     when: ex407server.changed == true
+
+   - name: print installation is completed
+     debug:
+     when: ex407server.changed == false

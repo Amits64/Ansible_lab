@@ -1,0 +1,11 @@
+all:
+  hosts:
+    ubuntu-server1:
+    ubuntu-server2:
+  children:
+    prod:
+      hosts:
+        ubuntu-server1:
+    dev:
+      hosts:
+        ubuntu-server2:

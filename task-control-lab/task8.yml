@@ -1,0 +1,25 @@
+---
+- name: Install software
+  become: yes
+  hosts: all
+  vars:
+    packages:
+      - name: apache2
+        required: True
+
+      - name: vsftpd
+        required: True
+
+      - name: zip
+        required: False
+  tasks:
+    - name: Install "{{ item.name }}" on Ubuntu
+      apt:
+        name: "{{ item.name }}"
+        state: absent
+
+      when:
+        - item.required == True
+        - ansible_facts['distribution'] =="Ubuntu"
+
+      loop: "{{ packages }}"

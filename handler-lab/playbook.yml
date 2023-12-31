@@ -1,0 +1,29 @@
+---
+- hosts: dev,prod 
+  become: yes
+  tasks:
+    - name: Install nginx
+      apt:
+        name: nginx
+        state: latest
+        update_cache: yes
+      when: inventory_hostname in groups ['prod']
+
+    - name: Start nginx
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+      when: inventory_hostname in groups ['dev']
+
+    - name: Copy files across hosts
+      copy:
+        src: "test.txt"
+        dest: "~/"
+      notify:
+       - restart nginx
+  handlers:
+    - name: restart nginx
+      service:
+        name: nginx
+        state: restarted

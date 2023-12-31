@@ -1,0 +1,24 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+   - name: Create devops group
+     group:
+      name: devops
+      state: present
+
+   - name: create users
+     user:
+      name: amit
+      comment: DevOps Engineer
+      shell: /bin/bash
+      group: devops
+      generate_ssh_key: yes
+      ssh_key_bits: 2048
+      ssh_key_file: ~/.ssh/id_rsa
+
+   - name: Download file from Internet
+     get_url:
+      url: https://www.cl.cam.ac.uk/teaching//2021/CloudComp/lectures/Introduction.pdf
+      dest: ~/cloud_computing.pdf
+      mode: 0644

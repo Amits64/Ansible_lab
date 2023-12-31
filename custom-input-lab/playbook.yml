@@ -1,0 +1,18 @@
+---
+- name: enter website details
+  hosts: all
+  connection: local
+  vars_prompt:
+ 
+    - name: website
+      prompt: "What is your website?"
+      private: no
+ 
+    - name: country
+      prompt: "Enter Country Name?"
+      private: no
+ 
+  tasks:
+ 
+    - debug:
+        msg: 'Website name: {{ website }} | Country name: {{ country }}'

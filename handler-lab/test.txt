@@ -1,0 +1,13 @@
+[0;32m                "support_discard": "4096",[0m
+[0;32m                "support_discard": "4096",[0m
+[0;32m                "support_discard": "4096",[0m
+[0;32m                "support_discard": "4096",[0m
+[0;32m                "support_discard": "0",[0m
+[0;32m                "support_discard": "0",[0m
+[0;32m                "support_discard": "0",[0m
+[0;32m                "support_discard": "0",[0m
+[0;32m                "support_discard": "0",[0m
+[0;32m                "support_discard": "0",[0m
+[0;32m                "rx_udp_tunnel_port_offload": "off [fixed]",[0m
+[0;32m                "rx_udp_tunnel_port_offload": "off [fixed]",[0m
+[0;32m                "rx_udp_tunnel_port_offload": "off [fixed]",[0m

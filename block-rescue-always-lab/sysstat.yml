@@ -1,0 +1,107 @@
+---
+- name: install sysstat in ubuntu and centos
+  hosts: dev
+  vars:
+    date: "{{ lookup('pipe', 'date +%Y%m%d-%H%M') }}"
+  tasks:
+    - block:
+        - name: verify the sysstat in ubuntu
+          command: dpkg-query -W sysstat
+          register: package
+          failed_when: package.rc > 1
+          when: ansible_distribution == "Ubuntu"
+
+        - name: print json output in ubuntu
+          debug:
+            var: package
+
+        - name: install sysstat if not installed in ubuntu
+          command: apt-get install sysstat -y
+          when: package is not defined or package.rc == 1
+
+        - name: take backup of existing sysstat config in ubuntu
+          copy:
+            src: /etc/default/sysstat
+            dest: /etc/default/sysstat.{{ date }}
+            remote_src: yes
+          when: package.stdout != ""
+
+        - name: replace the word in the sysstat file in ubuntu
+          replace:
+            dest: /etc/default/sysstat
+            regexp: "false"
+            replace: "true"
+
+        - name: configure sysstat file in cron.d in ubuntu
+          copy:
+            src: /etc/cron.d/sysstat
+            dest: /etc/cron.d/sysstat.{{ date }}
+            remote_src: yes
+
+        - name: Add activity every 2 mins everyday in ubuntu
+          lineinfile:
+            path: /etc/cron.d/sysstat
+            line: "*/2 * * * * root command -v debian-sa1 > /dev/null && debian-sa1 1 1"
+            regexp: 'debian-sa1 1 1'
+            backup: yes
+
+        - name: restart the sysstat service in ubuntu
+          service:
+            name: sysstat
+            state: restarted
+
+      rescue:
+        - name: verify the sysstat in centos
+          command: rpm -qa sysstat
+          register: package
+          when: ansible_distribution == "CentOS"
+
+        - name: print json output in centos
+          debug:
+            var: package
+
+        - name: sysstat package is not installed in centos
+          debug:
+            msg: "Sysstat package is not installed in this server"
+          when: package.stdout == ""
+
+        - name: sysstat package has been installed in centos
+          debug:
+            msg: "sysstat package has been installed in this server"
+          when: package.stdout != ""
+
+        - name: install sysstat package in the centos server
+          yum:
+            name: sysstat
+            state: latest
+          when: package.stdout == ""
+
+        - name: start the sysstat service in centos
+          service:
+            name: sysstat
+            state: started
+            enabled: yes
+          when: package.stdout != ""
+
+        - name: install python dependencies in centos
+          yum:
+            name: libselinux-python
+            state: latest
+
+        - name: configure sysstat file in cron.d in centos
+          copy:
+            src: /etc/cron.d/sysstat
+            dest: /etc/cron.d/sysstat.{{ date }}
+            remote_src: yes
+
+        - name: Add activity every 2 mins everyday in centos
+          lineinfile:
+            path: /etc/cron.d/sysstat
+            line: "2 * * * * root /usr/lib64/sa/sa1 1 1"
+            regexp: 'sa1 1 1'
+            backup: yes
+
+        - name: restart the sysstat service in centos
+          service:
+            name: sysstat
+            state: restarted

@@ -1,0 +1,16 @@
+---
+- hosts: all
+  become: yes
+  vars: 
+   - websoft: apache2
+  tasks:
+   - name: Install {{ websoft }}
+     apt:
+      name: "{{ websoft }}"
+      state: latest
+  
+   - name: Start the {{ websoft }} service
+     service:
+      name: "{{ websoft }}"
+      state: started
+      enabled: yes

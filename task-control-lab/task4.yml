@@ -1,0 +1,18 @@
+---
+- name: with_list is directly replaced by loop.
+  hosts: all
+  become: true
+  tasks:
+   - name: with_list
+     ansible.builtin.debug:
+      msg: "{{ item }}"
+     with_list:
+      - one
+      - two
+
+   - name: with_list -> loop
+     ansible.builtin.debug:
+      msg: "{{ item }}"
+     loop:
+      - one
+      - two

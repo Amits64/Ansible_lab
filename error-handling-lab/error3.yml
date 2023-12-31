@@ -1,0 +1,11 @@
+--- 
+- hosts: all
+  ignore_errors: yes
+  tasks:
+    - name: "Start the NGINX Server"
+      shell: "systemctl is-active nginx"
+      register: statusNginx
+      changed_when: "'inactive' not in statusNginx"
+
+    - debug:
+        msg: "{{ statusNginx.stdout }}"

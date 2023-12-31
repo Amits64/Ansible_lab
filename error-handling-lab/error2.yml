@@ -1,0 +1,14 @@
+--- 
+- hosts: all
+  ignore_errors: yes
+  tasks:
+    - name: "Start the NGINX Server"
+      shell: "systemctl is-active nginx"
+      register: statusNginx
+    
+    - name: print json output
+      debug:
+       var: statusNginx
+
+    - debug:
+        var: statusNginx.stdout

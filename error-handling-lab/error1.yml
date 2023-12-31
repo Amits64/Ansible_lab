@@ -1,0 +1,13 @@
+---
+- name: Repeated tasks can be written as standard loops
+  hosts: all
+  become: true
+  ignore_errors: yes
+  tasks:
+  - name: this will not be counted as a failure 1
+    command: /bin/false
+  - name: this will not be counted as a failure 2
+    command: /bin/false
+  - name: this will not be counted as a failure 3
+    debug: 
+     msg: "i am now able to clear all the interview on my own" 	

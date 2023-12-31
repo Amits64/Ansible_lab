@@ -1,0 +1,18 @@
+---
+- hosts: all
+  become: yes
+  tasks: 
+    - name: Copy the index.html file upon changes
+      template:
+        src: index.j2
+        dest: /var/www/html/index.html
+        mode: 0644
+      register: file
+      notify: restart nginx
+
+  handlers:
+    - name: restart nginx
+      service:
+       name: nginx
+       state: restarted
+      when: file.changed == true

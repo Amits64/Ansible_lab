@@ -1,0 +1,6 @@
+---
+- name: install webserver and add webserver service in firewall using role
+  hosts: all
+  become: yes
+  roles:
+   - webserver

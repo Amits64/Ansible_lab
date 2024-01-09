@@ -1,0 +1,20 @@
+---
+- name: Update apt cache
+  apt:
+    update_cache: yes
+
+- name: Install UFW (Uncomplicated Firewall)
+  apt:
+    name: ufw
+    state: present
+
+- name: Enable UFW
+  service:
+    name: ufw
+    state: started
+    enabled: yes
+
+- name: Allow service in UFW
+  ufw:
+    rule: allow
+    port: "{{ firewall_service }}"

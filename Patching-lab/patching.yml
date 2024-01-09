@@ -1,0 +1,8 @@
+---
+- name: update entire servers
+  hosts: all
+  tasks:
+   - name: update the system
+     apt:
+      name: "*"
+      state: latest

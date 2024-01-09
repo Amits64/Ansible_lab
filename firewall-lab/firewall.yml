@@ -1,0 +1,6 @@
+---
+- name: install nginx using role
+  hosts: all
+  become: yes
+  roles:
+   - myfirewall

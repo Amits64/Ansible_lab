@@ -1,0 +1,4 @@
+---
+# handlers file for myfirewall
+- name: restart ufw
+  service: name=ufw state=restarted enabled=yes

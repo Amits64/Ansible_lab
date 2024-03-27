@@ -1,9 +1,8 @@
-[prod]
-ubuntu-server1
-
 [dev]
-ubuntu-server2
+ubuntu-server
 
-[all]
-ubuntu-server1
-ubuntu-server2
+[qa]
+centos7-server
+
+[prod]
+rhel7-server 

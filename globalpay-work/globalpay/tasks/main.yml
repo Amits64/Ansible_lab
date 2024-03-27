@@ -1,0 +1,66 @@
+---
+- name: Generate SSH key pair
+  community.crypto.openssh_keypair:
+    path: "{{ keyPath }}"
+    type: rsa
+    size: 2048
+    state: present
+
+- name: Install lsof
+  apt:
+    name: lsof
+    state: present
+
+- name: Fix mountpoint permissions
+  file:
+    path: "{{ mountPath }}"
+    state: directory
+    mode: "0755"
+
+- name: Create "{{ group }}" user group
+  group:
+    name: "{{ group }}"
+
+- name: Add user
+  user:
+    name: "{{ user }}"
+    comment: "SVC - DXOP file xfer"
+    group: "{{ group }}"
+    home: "/home/globalpay"
+    password_lock: yes
+    state: present
+    system: yes
+
+- name: Check user existence
+  shell: id "{{ user }}"
+  register: user_check
+  changed_when: true
+
+- name: Set authorized key if user exists
+  authorized_key:
+    user: "{{ user }}"
+    state: present
+    key: "{{ dxop_pub_sshkey }}"
+
+- name: Set "{{ user }}" homedir to readonly
+  file:
+    path: "{{ mountPath }}"
+    state: directory
+    mode: "0644"
+
+- name: Add readme file to "{{ user }}" homedir
+  copy:
+    dest: "{{ mountPath }}/README"
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: "0644"
+    content: |
+      This is the content of the README file.
+      You can add any content you want here.
+
+- name: "Set DXOP user authorized key"
+  authorized_key:
+   user: "{{ user }}"
+   state: present
+   key: "{{ dxop_pub_sshkey }}"
+  when: user_check.stdout != ""

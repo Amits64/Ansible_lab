@@ -1,0 +1,37 @@
+---
+- hosts: dev
+  become: yes
+  tasks:
+    - name: Update all packages
+      apt:
+        upgrade: dist
+
+    - name: Check if Docker exists
+      shell: dpkg -l | grep -E "docker.io|containerd"
+      register: packageCheck
+      ignore_errors: yes
+
+    - name: Install Docker
+      apt:
+        name: "{{ item }}"
+        state: present
+        update_cache: yes
+      loop:
+        - containerd
+        - docker.io
+      when: packageCheck.rc != 0
+
+    - name: Pull SonarQube image
+      docker_image:
+        name: sonarqube
+        source: pull
+        tag: "8.9-community"
+
+    - name: Run SonarQube container
+      docker_container:
+        name: sonarqube
+        image: sonarqube:8.9-community
+        published_ports:
+          - "9000:9000"
+        memory: "512m"
+        state: started

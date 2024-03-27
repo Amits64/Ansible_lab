@@ -1,0 +1,354 @@
+ 
+---
+- name: Install ansible-collections-crypto
+  package:
+    name: ansible-base
+    state: latest
+
+- name: Install lsof
+  yum:
+    name: lsof
+    state: present
+
+- name: Fix mountpoint permissions
+  file:
+    path: "~/globalpay/"
+    state: directory
+    mode: "0755"
+
+- name: Create globalpay_group user group
+  group:
+    name: globalpay_group
+
+- name: Add dxop_user
+  user:
+    name: dxop_user
+    comment: "SVC - DXOP file xfer"
+    group: globalpay_group
+    home: "/home/globalpay"
+    password_lock: yes
+    state: present
+    system: yes
+  
+- name: "Set DXOP user homedir to readonly"
+  file:
+   path: "/home/globalpay"
+   state: directory
+   mode: 0500
+    
+- name: "Add readme file to DXOP user homedir"
+  copy:
+    dest: "/home/globalpay/README"
+    owner: "1234"
+    group: "globalpay"
+    mode: 0400
+    content: |
+      This is the content of the README file.
+      This is a test data.
+    
+- name: "Set DXOP user authorized key"
+  authorized_key:
+   user: "{{ dxop_user_id }}"
+   state: present
+   key: "{{ dxop_pub_sshkey }}"
+ 
+- name: "Add file processing user"
+  user:
+   name: "{{ file_process_user_id }}"
+   comment: SVC - DIMS file processing
+   group: "{{ shared_group }}"
+   home: "{{ file_process_user_homedir }}"
+   password_lock: yes
+   state: present
+   system: true
+   
+- name: "Create .ssh directory for file processing user"
+  file:
+   path: "{{ file_process_user_homedir }}/.ssh"
+   state: directory
+   owner: "{{ file_process_user_id }}"
+   group: "{{ shared_group }}"
+   mode: 0700
+
+- name: "Create ssh keypair for file processing user"
+  community.crypto.openssh_keypair:
+   path: "{{ file_process_user_homedir }}/.ssh/id_rsa"
+   type: rsa
+   size: 2048
+   owner: "{{ file_process_user_id }}"
+   group: "{{ shared_group }}"
+   mode: 0600
+   
+- name: "Create ssh config for file processing user"
+  copy:
+   dest: "{{ file_process_user_homedir }}/.ssh/config"
+   src: "{{ artifact_dir }}/ssh-configs/file-process-user.config"
+   owner: "{{ file_process_user_id }}"
+   group: "{{ shared_group }}"
+   mode: 0600
+   
+- name: "Create service account key file"
+  copy:
+   dest: "{{ file_process_user_homedir }}/{{ service_account_keyfile_name }}"
+   src: "{{ service_account_keyfile_source }}"
+   owner: "{{ file_process_user_id }}"
+   group: "{{ shared_group }}"
+   mode: 0600
+   register: svcaccountkeyfile
+   
+- name: "Authenticate service account with GCP"
+  command: "/bin/gcloud auth activate-service-account --key-file={{ service_account_keyfile_name }}"
+  become: yes
+  become_user: "{{ file_process_user_id }}"
+  become_flags: "--login --non-interactive"
+  when: svcaccountkeyfile.changed
+#      command: >
+#        su - {{ file_process_user_id }} -c "/bin/gcloud auth activate-service-account --key-file={{ service_account_keyfile_name }}"
+- name: "Create data directory"
+  file:
+   path: "{{ data_dir }}"
+   state: directory
+   owner: "{{ file_process_user_id }}"
+   group: "{{ shared_group }}"
+   mode: 0770
+   
+- name: "Create incoming source directory"
+  file:
+   path: "{{ incoming_source_dir }}"
+   state: directory
+   owner: "{{ dxop_user_id }}"
+   group: "{{ shared_group }}"
+   mode: 0770
+   
+- name: "Create incoming source directory"
+  file:
+   path: "{{ sdm_merchant_dir }}"
+   state: directory
+   owner: "{{ dxop_user_id }}"
+   group: "{{ shared_group }}"
+   mode: 0770
+   
+- name: "Create incoming staging directory"
+  file:
+   path: "{{ incoming_staging_dir }}"
+   state: directory
+   owner: "{{ file_process_user_id }}"
+   group: "{{ shared_group }}"
+   mode: 0700        
+   
+- name: "Create EVO data directory"
+  file:
+   path: "{{ data_dir_evo }}"
+   state: directory
+   owner: "{{ file_process_user_id }}"
+   group: "{{ shared_group }}"
+   mode: 0770
+    
+- name: "Create EVO incoming source directory"
+  file:
+   path: "{{ incoming_source_dir_evo }}"
+   state: directory
+   owner: "{{ dxop_user }}"
+   group: "{{ shared_group }}"
+   mode: 0770
+    
+- name: "Create EVO incoming staging directory"
+  file:
+   path: "{{ incoming_staging_dir_evo }}"
+   state: directory
+   owner: "{{ file_process_user_id }}"
+   group: "{{ shared_group }}"
+   mode: 0700               
+    
+- name: "Create outgoing staging directory"
+  file:
+   path: "{{ outgoing_staging_dir }}"
+   state: directory
+   owner: "{{ file_process_user_id }}"
+   group: "{{ shared_group }}"
+   mode: 0700
+   
+- name: "Create outgoing reports staging directory"
+  file:
+   path: "{{ outgoing_reports_staging_dir}}"
+   state: directory
+   owner: "{{ file_process_user_id }}"
+   group: "{{ shared_group }}"
+   mode: 0700
+   
+- name: "Create outgoing letters staging directory"
+  file:
+   path: "{{ outgoing_letters_staging_dir}}"
+   state: directory
+   owner: "{{ file_process_user_id }}"
+   group: "{{ shared_group }}"
+   mode: 0700
+    
+- name: "Create chargeback directory"
+  file:
+   path: "{{ all_chargebacks_dir}}"
+   state: directory
+   owner: "{{ dxop_user_id }}"
+   group: "{{ shared_group }}"
+   mode: 0770
+   
+- name: "Create special handling directory"
+  file:
+   path: "{{ special_handling_dir}}"
+   state: directory
+   owner: "{{ dxop_user_id }}"
+   group: "{{ shared_group }}"
+   mode: 0770
+   
+- name: "Create exceptions directory"
+  file:
+   path: "{{ exceptions_dir}}"
+   state: directory
+   owner: "{{ dxop_user_id }}"
+   group: "{{ shared_group }}"
+   mode: 0770
+   
+- name: "Create amex directory"
+  file:
+   path: "{{ amex_dir}}"
+   state: directory
+   owner: "{{ dxop_user_id }}"
+   group: "{{ shared_group }}"
+   mode: 0770
+   
+- name: "Create premier accounts directory"
+  file:
+   path: "{{ premier_accounts_dir}}"
+   state: directory
+   owner: "{{ dxop_user_id }}"
+   group: "{{ shared_group }}"
+   mode: 0770
+   
+- name: "Create ap fax directory"
+  file:
+   path: "{{ ap_fax_dir}}"
+   state: directory
+   owner: "{{ dxop_user_id }}"
+   group: "{{ shared_group }}"
+   mode: 0770
+   
+- name: "Create uk fax directory"
+  file:
+   path: "{{ uk_fax_dir}}"
+   state: directory
+   owner: "{{ dxop_user_id }}"
+   group: "{{ shared_group }}"
+   mode: 0770
+   
+- name: "Create conf directory"
+  file:
+   path: "{{ conf_dir }}"
+   state: directory
+   owner: "{{ file_process_user_id }}"
+   group: "{{ shared_group }}"
+   mode: 0700
+   
+- name: "Check script conf file source"
+  local_action:
+   module: stat
+   path: "{{ artifact_dir }}/conf/{{ lifecycle }}/"
+  become: false
+  register: stat_source_conf_dir
+   
+- name: "Copy script conf files"
+  copy:
+   dest: "{{ conf_dir }}"
+   src: "{{ artifact_dir }}/conf/{{ lifecycle }}/"
+   owner: "{{ file_process_user_id }}"
+   group: "{{ shared_group }}"
+   mode: 0600
+  when: stat_source_conf_dir.stat.exists == true
+   
+- name: "Create scripts directory"
+  file:
+   path: "{{ scripts_dir }}"
+   state: directory
+   owner: "{{ file_process_user_id }}"
+   group: "{{ shared_group }}"
+   mode: 0700
+   
+- name: "Copy processing scripts"
+  copy:
+   dest: "{{ scripts_dir }}"
+   src: "{{ artifact_dir }}/scripts/"
+   owner: "{{ file_process_user_id }}"
+   group: "{{ shared_group }}"
+   mode: 0700
+   
+- name: Add file processing user to cron.allow
+  lineinfile:
+   path: /etc/cron.allow
+   line: "{{ file_process_user_id }}"
+   owner: root
+   group: root
+   mode: 0600
+   create: yes
+   
+- name: "Setup GPN incoming file processing user crontab"
+  cron:
+   name: Incoming job GPN
+   user: "{{ file_process_user_id }}"
+   minute: '*/15'
+   job: "{{ scripts_dir }}/{{ incoming_script_gpn }}"
+   
+- name: "Setup HPY-1 incoming file processing user crontab"
+  cron:
+   name: Incoming job HPY-1
+   user: "{{ file_process_user_id }}"
+   minute: '*/15'
+   hour: '0-19'
+   job: "{{ scripts_dir }}/{{ incoming_script_hpy }}"  
+   
+- name: "Setup HPY-2 incoming file processing user crontab"
+  cron:
+   name: Incoming job HPY-2
+   user: "{{ file_process_user_id }}"
+   minute: '*/15'
+   hour: '23'
+   job: "{{ scripts_dir }}/{{ incoming_script_hpy }}"
+   
+- name: "Setup outgoing file processing user crontab"
+  cron:
+   name: Outgoing job
+   user: "{{ file_process_user_id }}"
+   minute: '*/15'
+   job: "{{ scripts_dir }}/{{ outgoing_script }}"
+    
+- name: "Setup outgoing reports processing user crontab"
+  cron:
+   name: Outgoing reports job
+   user: "{{ file_process_user_id }}"
+   minute: '0'
+   hour: '0'
+   day: '10'
+   job: "{{ scripts_dir }}/{{ outgoing_reports_script }}"
+   disabled: yes
+   
+- name: "Setup outgoing letters processing user crontab"
+  cron:
+   name: Outgoing letters job
+   user: "{{ file_process_user_id }}"
+   minute: '*/15'
+   job: "{{ scripts_dir }}/{{ outgoing_letters_script }}"
+   disabled: yes
+   
+- name: "Create stackdriver config for script logs"
+  copy:
+   dest: "/etc/google-fluentd/config.d"
+   src: "stackdriver/"
+   owner: "root"
+   group: "root"
+   mode: 0640
+   register: stackdriverconfig
+   
+- name: "Activate new stackdriver configs"
+  systemd:
+   name: google-fluentd
+   state: restarted
+   enabled: yes
+  when: stackdriverconfig.changed

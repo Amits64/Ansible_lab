@@ -1,0 +1,8 @@
+---
+- name: GlobalPay taks
+  hosts: dev
+  become: yes
+  gather_facts: yes
+  ignore_errors: yes
+  roles:
+    - globalpay

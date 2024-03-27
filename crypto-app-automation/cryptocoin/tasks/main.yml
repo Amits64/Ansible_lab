@@ -1,0 +1,17 @@
+---
+# tasks file for cryptocoin
+- name: Check if nginx webserver exists
+  shell: dpkg -l | grep "{{ item }}"
+  register: checkPackage
+  ignore_errors: yes
+
+- name: Install nginx if does not exist
+  apt:
+    name: "{{ item }}"
+    state: present
+  when: checkPackage.rc != 0
+
+- name: Copy index.html file to the nginx dir.
+  copy:
+    src: /root/crypto_analysis_app/index.html
+    dest: /usr/share/nginx/html/index.html

@@ -2,7 +2,7 @@
 - name: GlobalPay taks
   hosts: dev
   become: yes
-  gather_facts: yes
+  gather_facts: no
   ignore_errors: yes
   roles:
     - globalpay

@@ -17,7 +17,7 @@
     state: directory
     mode: "0755"
 
-- name: Create "{{ group }}" user group
+- name: Create DiMS user group
   group:
     name: "{{ group }}"
 
@@ -26,15 +26,37 @@
     name: "{{ user }}"
     comment: "SVC - DXOP file xfer"
     group: "{{ group }}"
-    home: "/home/globalpay"
+    home: "{{ dxop_user_homedir }}"
     password_lock: yes
     state: present
     system: yes
+
+- name: "Create bash profile for dxop user"
+  template:
+   dest: "{{ dxop_user_homedir }}/.bashrc"
+   src: "{{ ansible_files }}/.bashrc"
+   owner: "{{ user }}"
+   group: "{{ group }}"
+   mode: 0600
 
 - name: Check user existence
   shell: id "{{ user }}"
   register: user_check
   changed_when: false
+
+- name: Set "{{ user }}" homedir to readonly
+  file:
+    path: "{{ mountPath }}"
+    state: directory
+    mode: "0500"
+
+- name: Add readme file to "{{ user }}" homedir
+  copy:
+    src: "{{ ansible_files }}/README.md"
+    dest: "{{ mountPath }}/README.md"
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: "0400"    
 
 - name: Set authorized key if user exists
   authorized_key:
@@ -42,23 +64,57 @@
     state: present
     key: "{{ dxop_pub_sshkey }}"
 
-- name: Set "{{ user }}" homedir to readonly
-  file:
-    path: "{{ mountPath }}"
-    state: directory
-    mode: "0644"
-
-- name: Add readme file to "{{ user }}" homedir
-  copy:
-    src: "/root/ansible/globalpay-work/globalpay/files/README.md"
-    dest: "{{ mountPath }}/README.md"
-    owner: "{{ user }}"
-    group: "{{ group }}"
-    mode: "0644"    
-
 - name: "Set DXOP user authorized key"
   authorized_key:
    user: "{{ user }}"
    state: present
    key: "{{ dxop_pub_sshkey }}"
   when: user_check.stdout != ""
+
+- name: "Add file processing user"
+  user:
+   name: "{{ file_process_user }}"
+   comment: SVC - DIMS file processing
+   group: "{{ group }}"
+   home: "{{ file_process_user_homedir }}"
+   password_lock: yes
+   state: present
+   system: true
+   
+- name: "Create .ssh directory for file processing user"
+  file:
+   path: "{{ file_process_user_homedir }}/.ssh"
+   state: directory
+   owner: "{{ file_process_user }}"
+   group: "{{ group }}"
+   mode: 0700
+
+- name: "Create ssh keypair for file processing user"
+  openssh_keypair:
+   path: "{{ file_process_user_homedir }}/.ssh/id_rsa"
+   type: rsa
+   size: 2048
+   owner: "{{ file_process_user }}"
+   group: "{{ group }}"
+   mode: 0600
+   
+- name: "Create ssh config for file processing user"
+  copy:
+   dest: "{{ file_process_user_homedir }}/.ssh/config"
+   src: "{{ artifact_dir }}"
+   owner: "{{ file_process_user }}"
+   group: "{{ group }}"
+   mode: 0600
+
+- name: "Create service account key file"
+  copy:
+   src: "{{ ansible_files }}/svcaccountkeyfile.json"
+   dest: "{{ service_account_keyfile_name }}"
+   owner: "{{ file_process_user }}"
+   group: "{{ group }}"
+   mode: 0600
+  register: svcaccountkeyfile
+  
+- name: Print JSON output
+  debug:
+    var: svcaccountkeyfile

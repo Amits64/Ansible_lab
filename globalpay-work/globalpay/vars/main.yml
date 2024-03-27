@@ -1,7 +1,13 @@
 ---
 # vars file for globalpay
 keyPath: ~/.ssh/keyFile
-mountPath: /home/globalpay/
+mountPath: /home/data
+dxop_user_homedir: /home/dxop_user"
 user: dxop_user
 group: globalpay_group
 dxop_pub_sshkey: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCL4nOfzWi8Hea0/ijjUbewQhvO2of39Aekxhf50mQk+faBNREq/RXHmBtJ5lOiFWMIPJGBfiYaI5lh54Q0TKw6FNeobKJFhetBSUnLTxr5kL/ktH1l7AkWzqpndCfH+Jg4Uw61MCy1lPIaxV2x8jFB5ogshHMo55jAigHj0XKOwQg919M0kVzP9USzJ/v/Q0sJDsuE2dwdTXNPrI/qqzov1AyowgAHlLkTaKlPXhA72ooO7e+yV07YFrLAbdE/yTGhPkaZwkuOYxPaZp2Uy39k9iuBwt++JyWuRJJfE+gIRhUPnHgGu9F6OWsGIe0gDfAqXhxO6q0/RJGWcFjVX7mmzrNCmv5kuMjVGSmd6HSVicbuvmx4S5IAZMbtmPjh6KS9gzU+K5LFqQrp6fq8vgDHH3O/D6+6evODhsFIj8F94VnnXWuRtLGw/WdYhOBaNMCmB5edOrJdYBUzcM6eAjQjMaisP+Rq5tBhcB6Y8zqN52UOgOZfpgoZSXGvA5z1wv8= root@ubuntu.localdomain
+file_process_user: file_user
+file_process_user_homedir: /home/file_user/
+artifact_dir: /etc/ssh/sshd_config
+service_account_keyfile_name: /home/file_user/svcaccountkeyfile.json
+ansible_files: /root/ansible/globalpay-work/globalpay/files

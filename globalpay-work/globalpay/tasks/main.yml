@@ -1,6 +1,6 @@
 ---
 - name: Generate SSH key pair
-  community.crypto.openssh_keypair:
+  openssh_keypair:
     path: "{{ keyPath }}"
     type: rsa
     size: 2048
@@ -34,7 +34,7 @@
 - name: Check user existence
   shell: id "{{ user }}"
   register: user_check
-  changed_when: true
+  changed_when: false
 
 - name: Set authorized key if user exists
   authorized_key:
@@ -50,13 +50,11 @@
 
 - name: Add readme file to "{{ user }}" homedir
   copy:
-    dest: "{{ mountPath }}/README"
+    src: "/root/ansible/globalpay-work/globalpay/files/README.md"
+    dest: "{{ mountPath }}/README.md"
     owner: "{{ user }}"
     group: "{{ group }}"
-    mode: "0644"
-    content: |
-      This is the content of the README file.
-      You can add any content you want here.
+    mode: "0644"    
 
 - name: "Set DXOP user authorized key"
   authorized_key:

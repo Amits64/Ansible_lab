@@ -29,6 +29,12 @@
     source: pull
     tag: "latest"
 
+- name: Pull Redis image
+  docker_image:
+    name: redis
+    source: pull
+    tag: "7.2.4"
+
 # Mention container configuration below
 - name: Run SonarQube container
   docker_container:
@@ -50,3 +56,12 @@
     env:
       SPLUNK_START_ARGS: "--accept-license"
       SPLUNK_PASSWORD: "Password1!"
+
+- name: Run Redis container
+  docker_container:
+    name: redis-dev
+    image: redis:7.2.4
+    command: redis-server --appendonly yes
+    published_ports:
+      - "6379:6379"
+    state: started

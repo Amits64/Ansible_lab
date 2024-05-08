@@ -5,4 +5,4 @@ ubuntu-server
 centos7-server
 
 [prod]
-rhel7-server 
+rhel8-server 

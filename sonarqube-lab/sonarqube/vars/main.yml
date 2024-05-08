@@ -1,2 +1,5 @@
 ---
 # vars file for sonarqube
+packages:
+  - containerd
+  - docker.io

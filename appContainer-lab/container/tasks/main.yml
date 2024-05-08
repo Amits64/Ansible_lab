@@ -1,5 +1,5 @@
 ---
-# tasks file for sonarqube
+# tasks file for container
 - name: Update all packages
   apt:
     upgrade: dist
@@ -9,7 +9,7 @@
   register: packageCheck
   ignore_errors: yes
 
-- name: Ensure Docker in installed
+- name: Ensure Docker is installed
   apt:
     name: "{{ packages }}"
     state: present
@@ -34,6 +34,12 @@
     name: redis
     source: pull
     tag: "7.2.4"
+
+- name: Pull Jenkins image
+  docker_image:
+    name: jenkins/jenkins
+    source: pull
+    tag: "lts"
 
 # Mention container configuration below
 - name: Run SonarQube container
@@ -64,4 +70,15 @@
     command: redis-server --appendonly yes
     published_ports:
       - "6379:6379"
+    state: started
+
+- name: Run Jenkins container
+  docker_container:
+    name: jenkins-dev
+    image: jenkins/jenkins:lts
+    published_ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - "jenkins_volume:/var/jenkins_home"
     state: started

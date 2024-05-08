@@ -1,0 +1,695 @@
+[0;34mansible-playbook [core 2.16.2][0m
+[0;34m  config file = /etc/ansible/ansible.cfg[0m
+[0;34m  configured module search path = ['/root/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules'][0m
+[0;34m  ansible python module location = /usr/local/share/pipx/venvs/ansible/lib/python3.10/site-packages/ansible[0m
+[0;34m  ansible collection location = /root/.ansible/collections:/usr/share/ansible/collections[0m
+[0;34m  executable location = /usr/local/bin/ansible-playbook[0m
+[0;34m  python version = 3.10.12 (main, Nov 20 2023, 15:14:05) [GCC 11.4.0] (/usr/local/share/pipx/venvs/ansible/bin/python)[0m
+[0;34m  jinja version = 3.1.2[0m
+[0;34m  libyaml = True[0m
+[0;34mUsing /etc/ansible/ansible.cfg as config file[0m
+[0;34mhost_list declined parsing /root/ansible/sonarqube-lab/inventory.yml as it did not pass its verify_file() method[0m
+[0;34mscript declined parsing /root/ansible/sonarqube-lab/inventory.yml as it did not pass its verify_file() method[0m
+[0;34mParsed /root/ansible/sonarqube-lab/inventory.yml inventory source with ini plugin[0m
+[0;34mredirecting (type: modules) ansible.builtin.docker_image to community.docker.docker_image[0m
+[0;34mredirecting (type: modules) ansible.builtin.docker_container to community.docker.docker_container[0m
+[0;34mSkipping callback 'default', as we already have a stdout callback.[0m
+[0;34mSkipping callback 'minimal', as we already have a stdout callback.[0m
+[0;34mSkipping callback 'oneline', as we already have a stdout callback.[0m
+
+PLAYBOOK: sonarqube_ubuntu.yml *************************************************
+[0;34m1 plays in sonarqube_ubuntu.yml[0m
+
+PLAY [dev] *********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+[1;30mtask path: /root/ansible/sonarqube-lab/sonarqube_ubuntu.yml:2[0m
+[0;34m<ubuntu-server> Attempting python interpreter discovery[0m
+[0;34m<ubuntu-server> ESTABLISH SSH CONNECTION FOR USER: None[0m
+[0;34m<ubuntu-server> SSH: EXEC ssh -o ControlMaster=auto -o ControlPersist=600s -o StrictHostKeyChecking=no -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o ConnectTimeout=10 -o 'ControlPath="/root/.ansible/cp/%h-%p-%r"' ubuntu-server '/bin/sh -c '"'"'echo PLATFORM; uname; echo FOUND; command -v '"'"'"'"'"'"'"'"'python3.12'"'"'"'"'"'"'"'"'; command -v '"'"'"'"'"'"'"'"'python3.11'"'"'"'"'"'"'"'"'; command -v '"'"'"'"'"'"'"'"'python3.10'"'"'"'"'"'"'"'"'; command -v '"'"'"'"'"'"'"'"'python3.9'"'"'"'"'"'"'"'"'; command -v '"'"'"'"'"'"'"'"'python3.8'"'"'"'"'"'"'"'"'; command -v '"'"'"'"'"'"'"'"'python3.7'"'"'"'"'"'"'"'"'; command -v '"'"'"'"'"'"'"'"'python3.6'"'"'"'"'"'"'"'"'; command -v '"'"'"'"'"'"'"'"'/usr/bin/python3'"'"'"'"'"'"'"'"'; command -v '"'"'"'"'"'"'"'"'/usr/libexec/platform-python'"'"'"'"'"'"'"'"'; command -v '"'"'"'"'"'"'"'"'python2.7'"'"'"'"'"'"'"'"'; command -v '"'"'"'"'"'"'"'"'/usr/bin/python'"'"'"'"'"'"'"'"'; command -v '"'"'"'"'"'"'"'"'python'"'"'"'"'"'"'"'"'; echo ENDFOUND && sleep 0'"'"''[0m
+[0;34m<ubuntu-server> (0, b'PLATFORM\nLinux\nFOUND\n/usr/bin/python3.10\n/usr/bin/python3\nENDFOUND\n', b'')[0m
+[0;34m<ubuntu-server> ESTABLISH SSH CONNECTION FOR USER: None[0m
+[0;34m<ubuntu-server> SSH: EXEC ssh -o ControlMaster=auto -o ControlPersist=600s -o StrictHostKeyChecking=no -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o ConnectTimeout=10 -o 'ControlPath="/root/.ansible/cp/%h-%p-%r"' ubuntu-server '/bin/sh -c '"'"'/usr/bin/python3.10 && sleep 0'"'"''[0m
+[0;34m<ubuntu-server> (0, b'{"platform_dist_result": [], "osrelease_content": "PRETTY_NAME=\\"Ubuntu 22.04.4 LTS\\"\\nNAME=\\"Ubuntu\\"\\nVERSION_ID=\\"22.04\\"\\nVERSION=\\"22.04.4 LTS (Jammy Jellyfish)\\"\\nVERSION_CODENAME=jammy\\nID=ubuntu\\nID_LIKE=debian\\nHOME_URL=\\"https://www.ubuntu.com/\\"\\nSUPPORT_URL=\\"https://help.ubuntu.com/\\"\\nBUG_REPORT_URL=\\"https://bugs.launchpad.net/ubuntu/\\"\\nPRIVACY_POLICY_URL=\\"https://www.ubuntu.com/legal/terms-and-policies/privacy-policy\\"\\nUBUNTU_CODENAME=jammy\\n"}\n', b'')[0m
+[0;34mUsing module file /usr/local/share/pipx/venvs/ansible/lib/python3.10/site-packages/ansible/modules/setup.py[0m
+[0;34mPipelining is enabled.[0m
+[0;34m<ubuntu-server> ESTABLISH SSH CONNECTION FOR USER: None[0m
+[0;34m<ubuntu-server> SSH: EXEC ssh -o ControlMaster=auto -o ControlPersist=600s -o StrictHostKeyChecking=no -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o ConnectTimeout=10 -o 'ControlPath="/root/.ansible/cp/%h-%p-%r"' ubuntu-server '/bin/sh -c '"'"'sudo -H -S -n  -u root /bin/sh -c '"'"'"'"'"'"'"'"'echo BECOME-SUCCESS-rchtjqrkljrfbzfigogxlbhmmowfkpda ; /usr/bin/python3'"'"'"'"'"'"'"'"' && sleep 0'"'"''[0m
+[0;34mEscalation succeeded[0m
+[0;34m<ubuntu-server> (0, b'\n{"ansible_facts": {"ansible_loadavg": {"1m": 0.24755859375, "5m": 0.2275390625, "15m": 0.1337890625}, "ansible_ssh_host_key_dsa_public": "AAAAB3NzaC1kc3MAAACBAMMDO+UXVXskIFyZTuyVKRnlDndZxRn6TrURGK0kWHIxk3tbyss/6p3+HWpurgZ4FRP1cAMtT+L0jtDu09j0oMuxdYa1MVAcv9eu8W6pppZWwjTEcuOHOhF09FZwPeYjrKv05hwQXYl1Aydy9GMmAY/lh1cjjq1acROE23F5+AFJAAAAFQCVmlgEeYr3Vy4N6Ynp7WWUHSRwKQAAAIEAgCmnDbigs4OTmrs87P9xr+cH5tsgSdp2aNVLXlCdifpOh4jqu8Fuc4DJlaJT64H5KAfMYqbFIIFYgzx35F8xlsdPw+W0ErKR5aG8y8S0zueeNRJiS+WtRfbZD68737jrJR9XLKxkXlLui2Po2j6bRI1DdE8dXKfrlZND+f/Lr4IAAACAdnZO2aUjzlX6Io9m1UbYogtKJ+0ca+m2l0DEWsjgbCaq70cL2UhGK+kmtFYarPer/0z86doT34SqgHqsWDxax64+Ra6qPX5rZfNpNTT5BF40FYxqP+t8OF+pqsrdv73kT9pm5fAotkcHpkMvUbYuF36nK+88gzRvrp8hfOad2Jo=", "ansible_ssh_host_key_dsa_public_keytype": "ssh-dss", "ansible_ssh_host_key_rsa_public": "AAAAB3NzaC1yc2EAAAADAQABAAABgQCSMquy1M6rfNGnwTUNb0dVXA1Dc/Av1/kkyhiZCYigvadw5cwV07KNtMIYApQlkGQmchUukKcpVGOQ+m2e9u7WsXs77pMxNLKNR2vtcOgMlZoVWSsyRHZkTJ+AyB6kM2bQieqs9Jh0mlPy0fVD73MbLlzwAA4aIzRgNtuGRkQtn+3BNUcGjmhiFY6HVqI5KykwJ/VceRGIExLMy3HWirgtHwA7lLp3Y9u3QIkbBbQbCMvnggAPKozdYB7H+DmobFn3CZubVbdAs7jTrNRQT5P8OqMXtwRQpzuqFcX89idnijk6JYrSXhsZBLLYlfDeRZnn3+BnUB49FUJO2xk9TisSAyxv438IuG+sl3Qp0HUbJ8w7qY5jI1TaiUt6hYGpbvM/7O4SSE3mq5ZFF7kYgxC5JJzkeg0dXSAw1j0KnPbzn0rHEOzdGVJ4Pv4uZ9N/7hYAC+hgaUggvW3b/EXB2V+o7OHTDynv2YWjLFiIb7iEzB7csgIJ5SifGt5XgR+43ks=", "ansible_ssh_host_key_rsa_public_keytype": "ssh-rsa", "ansible_ssh_host_key_ecdsa_public": "AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBIeCk914i4RBmbm0IQGyZMjG2D5M1q78Nv5Hew0VV3oxn5PykgiCVAftzNVfd4Qez0lFZwVqfhkIQJd5Lik27EU=", "ansible_ssh_host_key_ecdsa_public_keytype": "ecdsa-sha2-nistp256", "ansible_ssh_host_key_ed25519_public": "AAAAC3NzaC1lZDI1NTE5AAAAIGhQMzH8TVowqk96IfU+Ib6y1zbzUe7szy7Wj29kOpYe", "ansible_ssh_host_key_ed25519_public_keytype": "ssh-ed25519", "ansible_system": "Linux", "ansible_kernel": "6.2.0-34-generic", "ansible_kernel_version": "#34~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Thu Sep  7 13:12:03 UTC 2", "ansible_machine": "x86_64", "ansible_python_version": "3.10.12", "ansible_fqdn": "ubuntu-server", "ansible_hostname": "ubuntu-server", "ansible_nodename": "ubuntu-server", "ansible_domain": "", "ansible_userspace_bits": "64", "ansible_architecture": "x86_64", "ansible_userspace_architecture": "x86_64", "ansible_machine_id": "6ea8233619364e2c9732855f50e1d6a7", "ansible_lsb": {"id": "Ubuntu", "description": "Ubuntu 22.04.4 LTS", "release": "22.04", "codename": "jammy", "major_release": "22"}, "ansible_virtualization_role": "guest", "ansible_virtualization_type": "virtualbox", "ansible_virtualization_tech_guest": ["virtualbox"], "ansible_virtualization_tech_host": ["virtualbox"], "ansible_user_id": "root", "ansible_user_uid": 0, "ansible_user_gid": 0, "ansible_user_gecos": "root", "ansible_user_dir": "/root", "ansible_user_shell": "/bin/bash", "ansible_real_user_id": 0, "ansible_effective_user_id": 0, "ansible_real_group_id": 0, "ansible_effective_group_id": 0, "ansible_system_capabilities_enforced": "False", "ansible_system_capabilities": [], "ansible_python": {"version": {"major": 3, "minor": 10, "micro": 12, "releaselevel": "final", "serial": 0}, "version_info": [3, 10, 12, "final", 0], "executable": "/usr/bin/python3", "has_sslcontext": true, "type": "cpython"}, "ansible_apparmor": {"status": "enabled"}, "ansible_fibre_channel_wwn": [], "ansible_processor": ["0", "AuthenticAMD", "AMD Ryzen 5 5500U with Radeon Graphics", "1", "AuthenticAMD", "AMD Ryzen 5 5500U with Radeon Graphics"], "ansible_processor_count": 1, "ansible_processor_cores": 2, "ansible_processor_threads_per_core": 1, "ansible_processor_vcpus": 2, "ansible_processor_nproc": 2, "ansible_memtotal_mb": 1959, "ansible_memfree_mb": 100, "ansible_swaptotal_mb": 8191, "ansible_swapfree_mb": 8075, "ansible_memory_mb": {"real": {"total": 1959, "used": 1859, "free": 100}, "nocache": {"free": 208, "used": 1751}, "swap": {"total": 8191, "free": 8075, "used": 116, "cached": 29}}, "ansible_bios_date": "12/01/2006", "ansible_bios_vendor": "innotek GmbH", "ansible_bios_version": "VirtualBox", "ansible_board_asset_tag": "NA", "ansible_board_name": "VirtualBox", "ansible_board_serial": "0", "ansible_board_vendor": "Oracle Corporation", "ansible_board_version": "1.2", "ansible_chassis_asset_tag": "NA", "ansible_chassis_serial": "NA", "ansible_chassis_vendor": "Oracle Corporation", "ansible_chassis_version": "NA", "ansible_form_factor": "Other", "ansible_product_name": "VirtualBox", "ansible_product_serial": "0", "ansible_product_uuid": "3e67c570-5b7d-4e4e-8401-33852ee7609b", "ansible_product_version": "1.2", "ansible_system_vendor": "innotek GmbH", "ansible_devices": {"loop1": {"virtual": 1, "links": {"ids": [], "uuids": [], "labels": [], "masters": []}, "vendor": null, "model": null, "sas_address": null, "sas_device_handle": null, "removable": "0", "support_discard": "0", "partitions": {}, "rotational": "1", "scheduler_mode": "none", "sectors": "0", "sectorsize": "512", "size": "0.00 Bytes", "host": "", "holders": []}, "loop6": {"virtual": 1, "links": {"ids": [], "uuids": [], "labels": [], "masters": []}, "vendor": null, "model": null, "sas_address": null, "sas_device_handle": null, "removable": "0", "support_discard": "0", "partitions": {}, "rotational": "1", "scheduler_mode": "none", "sectors": "0", "sectorsize": "512", "size": "0.00 Bytes", "host": "", "holders": []}, "loop4": {"virtual": 1, "links": {"ids": [], "uuids": [], "labels": [], "masters": []}, "vendor": null, "model": null, "sas_address": null, "sas_device_handle": null, "removable": "0", "support_discard": "0", "partitions": {}, "rotational": "1", "scheduler_mode": "none", "sectors": "0", "sectorsize": "512", "size": "0.00 Bytes", "host": "", "holders": []}, "loop2": {"virtual": 1, "links": {"ids": [], "uuids": [], "labels": [], "masters": []}, "vendor": null, "model": null, "sas_address": null, "sas_device_handle": null, "removable": "0", "support_discard": "0", "partitions": {}, "rotational": "1", "scheduler_mode": "none", "sectors": "0", "sectorsize": "512", "size": "0.00 Bytes", "host": "", "holders": []}, "loop0": {"virtual": 1, "links": {"ids": [], "uuids": [], "labels": [], "masters": []}, "vendor": null, "model": null, "sas_address": null, "sas_device_handle": null, "removable": "0", "support_discard": "0", "partitions": {}, "rotational": "1", "scheduler_mode": "none", "sectors": "0", "sectorsize": "512", "size": "0.00 Bytes", "host": "", "holders": []}, "loop7": {"virtual": 1, "links": {"ids": [], "uuids": [], "labels": [], "masters": []}, "vendor": null, "model": null, "sas_address": null, "sas_device_handle": null, "removable": "0", "support_discard": "0", "partitions": {}, "rotational": "1", "scheduler_mode": "none", "sectors": "0", "sectorsize": "512", "size": "0.00 Bytes", "host": "", "holders": []}, "sda": {"virtual": 1, "links": {"ids": ["ata-VBOX_HARDDISK_VB024ca721-d054fab5", "scsi-0ATA_VBOX_HARDDISK_VB024ca721-d054fab5", "scsi-1ATA_VBOX_HARDDISK_VB024ca721-d054fab5", "scsi-SATA_VBOX_HARDDISK_VB024ca721-d054fab5"], "uuids": [], "labels": [], "masters": []}, "vendor": "ATA", "model": "VBOX HARDDISK", "sas_address": null, "sas_device_handle": null, "serial": "VB024ca721", "removable": "0", "support_discard": "0", "partitions": {"sda4": {"links": {"ids": ["ata-VBOX_HARDDISK_VB024ca721-d054fab5-part4", "scsi-0ATA_VBOX_HARDDISK_VB024ca721-d054fab5-part4", "scsi-1ATA_VBOX_HARDDISK_VB024ca721-d054fab5-part4", "scsi-SATA_VBOX_HARDDISK_VB024ca721-d054fab5-part4"], "uuids": ["99e38ad8-4d75-48ef-b45f-05211e28326e"], "labels": [], "masters": []}, "start": "33558528", "sectors": "234874880", "sectorsize": 512, "size": "112.00 GB", "uuid": "99e38ad8-4d75-48ef-b45f-05211e28326e", "holders": []}, "sda2": {"links": {"ids": ["ata-VBOX_HARDDISK_VB024ca721-d054fab5-part2", "scsi-0ATA_VBOX_HARDDISK_VB024ca721-d054fab5-part2", "scsi-1ATA_VBOX_HARDDISK_VB024ca721-d054fab5-part2", "scsi-SATA_VBOX_HARDDISK_VB024ca721-d054fab5-part2"], "uuids": ["282842b6-71fe-4536-884f-ddc2660d7cbb"], "labels": [], "masters": []}, "start": "4096", "sectors": "16777216", "sectorsize": 512, "size": "8.00 GB", "uuid": "282842b6-71fe-4536-884f-ddc2660d7cbb", "holders": []}, "sda3": {"links": {"ids": ["ata-VBOX_HARDDISK_VB024ca721-d054fab5-part3", "scsi-0ATA_VBOX_HARDDISK_VB024ca721-d054fab5-part3", "scsi-1ATA_VBOX_HARDDISK_VB024ca721-d054fab5-part3", "scsi-SATA_VBOX_HARDDISK_VB024ca721-d054fab5-part3"], "uuids": ["3398cc71-37e4-4e32-80dc-40e5ac8daf03"], "labels": [], "masters": []}, "start": "16781312", "sectors": "16777216", "sectorsize": 512, "size": "8.00 GB", "uuid": "3398cc71-37e4-4e32-80dc-40e5ac8daf03", "holders": []}, "sda1": {"links": {"ids": ["ata-VBOX_HARDDISK_VB024ca721-d054fab5-part1", "scsi-0ATA_VBOX_HARDDISK_VB024ca721-d054fab5-part1", "scsi-1ATA_VBOX_HARDDISK_VB024ca721-d054fab5-part1", "scsi-SATA_VBOX_HARDDISK_VB024ca721-d054fab5-part1"], "uuids": [], "labels": [], "masters": []}, "start": "2048", "sectors": "2048", "sectorsize": 512, "size": "1.00 MB", "uuid": null, "holders": []}}, "rotational": "1", "scheduler_mode": "mq-deadline", "sectors": "268435456", "sectorsize": "512", "size": "128.00 GB", "host": "IDE interface: Intel Corporation 82371AB/EB/MB PIIX4 IDE (rev 01)", "holders": []}, "loop5": {"virtual": 1, "links": {"ids": [], "uuids": [], "labels": [], "masters": []}, "vendor": null, "model": null, "sas_address": null, "sas_device_handle": null, "removable": "0", "support_discard": "0", "partitions": {}, "rotational": "1", "scheduler_mode": "none", "sectors": "0", "sectorsize": "512", "size": "0.00 Bytes", "host": "", "holders": []}, "loop3": {"virtual": 1, "links": {"ids": [], "uuids": [], "labels": [], "masters": []}, "vendor": null, "model": null, "sas_address": null, "sas_device_handle": null, "removable": "0", "support_discard": "0", "partitions": {}, "rotational": "1", "scheduler_mode": "none", "sectors": "0", "sectorsize": "512", "size": "0.00 Bytes", "host": "", "holders": []}}, "ansible_device_links": {"ids": {"sda": ["ata-VBOX_HARDDISK_VB024ca721-d054fab5", "scsi-0ATA_VBOX_HARDDISK_VB024ca721-d054fab5", "scsi-1ATA_VBOX_HARDDISK_VB024ca721-d054fab5", "scsi-SATA_VBOX_HARDDISK_VB024ca721-d054fab5"], "sda2": ["ata-VBOX_HARDDISK_VB024ca721-d054fab5-part2", "scsi-0ATA_VBOX_HARDDISK_VB024ca721-d054fab5-part2", "scsi-1ATA_VBOX_HARDDISK_VB024ca721-d054fab5-part2", "scsi-SATA_VBOX_HARDDISK_VB024ca721-d054fab5-part2"], "sda1": ["ata-VBOX_HARDDISK_VB024ca721-d054fab5-part1", "scsi-0ATA_VBOX_HARDDISK_VB024ca721-d054fab5-part1", "scsi-1ATA_VBOX_HARDDISK_VB024ca721-d054fab5-part1", "scsi-SATA_VBOX_HARDDISK_VB024ca721-d054fab5-part1"], "sda3": ["ata-VBOX_HARDDISK_VB024ca721-d054fab5-part3", "scsi-0ATA_VBOX_HARDDISK_VB024ca721-d054fab5-part3", "scsi-1ATA_VBOX_HARDDISK_VB024ca721-d054fab5-part3", "scsi-SATA_VBOX_HARDDISK_VB024ca721-d054fab5-part3"], "sda4": ["ata-VBOX_HARDDISK_VB024ca721-d054fab5-part4", "scsi-0ATA_VBOX_HARDDISK_VB024ca721-d054fab5-part4", "scsi-1ATA_VBOX_HARDDISK_VB024ca721-d054fab5-part4", "scsi-SATA_VBOX_HARDDISK_VB024ca721-d054fab5-part4"]}, "uuids": {"sda2": ["282842b6-71fe-4536-884f-ddc2660d7cbb"], "sda3": ["3398cc71-37e4-4e32-80dc-40e5ac8daf03"], "sda4": ["99e38ad8-4d75-48ef-b45f-05211e28326e"]}, "labels": {}, "masters": {}}, "ansible_uptime_seconds": 194377, "ansible_lvm": {"lvs": {}, "vgs": {}, "pvs": {}}, "ansible_mounts": [{"mount": "/", "device": "/dev/sda4", "fstype": "ext4", "options": "rw,relatime", "size_total": 117768843264, "size_available": 98072805376, "block_size": 4096, "block_total": 28752159, "block_available": 23943556, "block_used": 4808603, "inode_total": 7340032, "inode_available": 7011559, "inode_used": 328473, "uuid": "99e38ad8-4d75-48ef-b45f-05211e28326e"}, {"mount": "/boot", "device": "/dev/sda2", "fstype": "ext4", "options": "rw,relatime", "size_total": 8350298112, "size_available": 7346601984, "block_size": 4096, "block_total": 2038647, "block_available": 1793604, "block_used": 245043, "inode_total": 524288, "inode_available": 523961, "inode_used": 327, "uuid": "282842b6-71fe-4536-884f-ddc2660d7cbb"}], "ansible_distribution": "Ubuntu", "ansible_distribution_release": "jammy", "ansible_distribution_version": "22.04", "ansible_distribution_major_version": "22", "ansible_distribution_file_path": "/etc/os-release", "ansible_distribution_file_variety": "Debian", "ansible_distribution_file_parsed": true, "ansible_os_family": "Debian", "ansible_interfaces": ["eth1", "eth0", "virbr0", "vethc52cfc6", "lo", "docker0"], "ansible_virbr0": {"device": "virbr0", "macaddress": "52:54:00:de:cc:5d", "mtu": 1500, "active": false, "type": "bridge", "interfaces": [], "id": "8000.525400decc5d", "stp": true, "speed": -1, "promisc": false, "ipv4": {"address": "192.168.122.1", "broadcast": "192.168.122.255", "netmask": "255.255.255.0", "network": "192.168.122.0", "prefix": "24"}, "features": {"rx_checksumming": "off [fixed]", "tx_checksumming": "on", "tx_checksum_ipv4": "off [fixed]", "tx_checksum_ip_generic": "on", "tx_checksum_ipv6": "off [fixed]", "tx_checksum_fcoe_crc": "off [fixed]", "tx_checksum_sctp": "off [fixed]", "scatter_gather": "on", "tx_scatter_gather": "on", "tx_scatter_gather_fraglist": "on", "tcp_segmentation_offload": "on", "tx_tcp_segmentation": "on", "tx_tcp_ecn_segmentation": "on", "tx_tcp_mangleid_segmentation": "on", "tx_tcp6_segmentation": "on", "generic_segmentation_offload": "on", "generic_receive_offload": "on", "large_receive_offload": "off [fixed]", "rx_vlan_offload": "off [fixed]", "tx_vlan_offload": "on", "ntuple_filters": "off [fixed]", "receive_hashing": "off [fixed]", "highdma": "on", "rx_vlan_filter": "off [fixed]", "vlan_challenged": "off [fixed]", "tx_lockless": "on [fixed]", "netns_local": "on [fixed]", "tx_gso_robust": "on", "tx_fcoe_segmentation": "on", "tx_gre_segmentation": "on", "tx_gre_csum_segmentation": "on", "tx_ipxip4_segmentation": "on", "tx_ipxip6_segmentation": "on", "tx_udp_tnl_segmentation": "on", "tx_udp_tnl_csum_segmentation": "on", "tx_gso_partial": "on", "tx_tunnel_remcsum_segmentation": "on", "tx_sctp_segmentation": "on", "tx_esp_segmentation": "on", "tx_udp_segmentation": "on", "tx_gso_list": "on", "fcoe_mtu": "off [fixed]", "tx_nocache_copy": "off", "loopback": "off [fixed]", "rx_fcs": "off [fixed]", "rx_all": "off [fixed]", "tx_vlan_stag_hw_insert": "on", "rx_vlan_stag_hw_parse": "off [fixed]", "rx_vlan_stag_filter": "off [fixed]", "l2_fwd_offload": "off [fixed]", "hw_tc_offload": "off [fixed]", "esp_hw_offload": "off [fixed]", "esp_tx_csum_hw_offload": "off [fixed]", "rx_udp_tunnel_port_offload": "off [fixed]", "tls_hw_tx_offload": "off [fixed]", "tls_hw_rx_offload": "off [fixed]", "rx_gro_hw": "off [fixed]", "tls_hw_record": "off [fixed]", "rx_gro_list": "off", "macsec_hw_offload": "off [fixed]", "rx_udp_gro_forwarding": "off", "hsr_tag_ins_offload": "off [fixed]", "hsr_tag_rm_offload": "off [fixed]", "hsr_fwd_offload": "off [fixed]", "hsr_dup_offload": "off [fixed]"}, "timestamping": [], "hw_timestamp_filters": []}, "ansible_eth0": {"device": "eth0", "macaddress": "08:00:27:a0:e5:9c", "mtu": 1500, "active": true, "module": "e1000", "type": "ether", "pciid": "0000:00:03.0", "speed": 1000, "promisc": false, "ipv4": {"address": "10.0.2.15", "broadcast": "", "netmask": "255.255.255.0", "network": "10.0.2.0", "prefix": "24"}, "ipv6": [{"address": "fe80::a00:27ff:fea0:e59c", "prefix": "64", "scope": "link"}], "features": {"rx_checksumming": "off", "tx_checksumming": "on", "tx_checksum_ipv4": "off [fixed]", "tx_checksum_ip_generic": "on", "tx_checksum_ipv6": "off [fixed]", "tx_checksum_fcoe_crc": "off [fixed]", "tx_checksum_sctp": "off [fixed]", "scatter_gather": "on", "tx_scatter_gather": "on", "tx_scatter_gather_fraglist": "off [fixed]", "tcp_segmentation_offload": "on", "tx_tcp_segmentation": "on", "tx_tcp_ecn_segmentation": "off [fixed]", "tx_tcp_mangleid_segmentation": "off", "tx_tcp6_segmentation": "off [fixed]", "generic_segmentation_offload": "on", "generic_receive_offload": "on", "large_receive_offload": "off [fixed]", "rx_vlan_offload": "on", "tx_vlan_offload": "on [fixed]", "ntuple_filters": "off [fixed]", "receive_hashing": "off [fixed]", "highdma": "off [fixed]", "rx_vlan_filter": "on [fixed]", "vlan_challenged": "off [fixed]", "tx_lockless": "off [fixed]", "netns_local": "off [fixed]", "tx_gso_robust": "off [fixed]", "tx_fcoe_segmentation": "off [fixed]", "tx_gre_segmentation": "off [fixed]", "tx_gre_csum_segmentation": "off [fixed]", "tx_ipxip4_segmentation": "off [fixed]", "tx_ipxip6_segmentation": "off [fixed]", "tx_udp_tnl_segmentation": "off [fixed]", "tx_udp_tnl_csum_segmentation": "off [fixed]", "tx_gso_partial": "off [fixed]", "tx_tunnel_remcsum_segmentation": "off [fixed]", "tx_sctp_segmentation": "off [fixed]", "tx_esp_segmentation": "off [fixed]", "tx_udp_segmentation": "off [fixed]", "tx_gso_list": "off [fixed]", "fcoe_mtu": "off [fixed]", "tx_nocache_copy": "off", "loopback": "off [fixed]", "rx_fcs": "off", "rx_all": "off", "tx_vlan_stag_hw_insert": "off [fixed]", "rx_vlan_stag_hw_parse": "off [fixed]", "rx_vlan_stag_filter": "off [fixed]", "l2_fwd_offload": "off [fixed]", "hw_tc_offload": "off [fixed]", "esp_hw_offload": "off [fixed]", "esp_tx_csum_hw_offload": "off [fixed]", "rx_udp_tunnel_port_offload": "off [fixed]", "tls_hw_tx_offload": "off [fixed]", "tls_hw_rx_offload": "off [fixed]", "rx_gro_hw": "off [fixed]", "tls_hw_record": "off [fixed]", "rx_gro_list": "off", "macsec_hw_offload": "off [fixed]", "rx_udp_gro_forwarding": "off", "hsr_tag_ins_offload": "off [fixed]", "hsr_tag_rm_offload": "off [fixed]", "hsr_fwd_offload": "off [fixed]", "hsr_dup_offload": "off [fixed]"}, "timestamping": [], "hw_timestamp_filters": []}, "ansible_lo": {"device": "lo", "mtu": 65536, "active": true, "type": "loopback", "promisc": false, "ipv4": {"address": "127.0.0.1", "broadcast": "", "netmask": "255.0.0.0", "network": "127.0.0.0", "prefix": "8"}, "ipv6": [{"address": "::1", "prefix": "128", "scope": "host"}], "features": {"rx_checksumming": "on [fixed]", "tx_checksumming": "on", "tx_checksum_ipv4": "off [fixed]", "tx_checksum_ip_generic": "on [fixed]", "tx_checksum_ipv6": "off [fixed]", "tx_checksum_fcoe_crc": "off [fixed]", "tx_checksum_sctp": "on [fixed]", "scatter_gather": "on", "tx_scatter_gather": "on [fixed]", "tx_scatter_gather_fraglist": "on [fixed]", "tcp_segmentation_offload": "on", "tx_tcp_segmentation": "on", "tx_tcp_ecn_segmentation": "on", "tx_tcp_mangleid_segmentation": "on", "tx_tcp6_segmentation": "on", "generic_segmentation_offload": "on", "generic_receive_offload": "on", "large_receive_offload": "off [fixed]", "rx_vlan_offload": "off [fixed]", "tx_vlan_offload": "off [fixed]", "ntuple_filters": "off [fixed]", "receive_hashing": "off [fixed]", "highdma": "on [fixed]", "rx_vlan_filter": "off [fixed]", "vlan_challenged": "on [fixed]", "tx_lockless": "on [fixed]", "netns_local": "on [fixed]", "tx_gso_robust": "off [fixed]", "tx_fcoe_segmentation": "off [fixed]", "tx_gre_segmentation": "off [fixed]", "tx_gre_csum_segmentation": "off [fixed]", "tx_ipxip4_segmentation": "off [fixed]", "tx_ipxip6_segmentation": "off [fixed]", "tx_udp_tnl_segmentation": "off [fixed]", "tx_udp_tnl_csum_segmentation": "off [fixed]", "tx_gso_partial": "off [fixed]", "tx_tunnel_remcsum_segmentation": "off [fixed]", "tx_sctp_segmentation": "on", "tx_esp_segmentation": "off [fixed]", "tx_udp_segmentation": "on", "tx_gso_list": "on", "fcoe_mtu": "off [fixed]", "tx_nocache_copy": "off [fixed]", "loopback": "on [fixed]", "rx_fcs": "off [fixed]", "rx_all": "off [fixed]", "tx_vlan_stag_hw_insert": "off [fixed]", "rx_vlan_stag_hw_parse": "off [fixed]", "rx_vlan_stag_filter": "off [fixed]", "l2_fwd_offload": "off [fixed]", "hw_tc_offload": "off [fixed]", "esp_hw_offload": "off [fixed]", "esp_tx_csum_hw_offload": "off [fixed]", "rx_udp_tunnel_port_offload": "off [fixed]", "tls_hw_tx_offload": "off [fixed]", "tls_hw_rx_offload": "off [fixed]", "rx_gro_hw": "off [fixed]", "tls_hw_record": "off [fixed]", "rx_gro_list": "off", "macsec_hw_offload": "off [fixed]", "rx_udp_gro_forwarding": "off", "hsr_tag_ins_offload": "off [fixed]", "hsr_tag_rm_offload": "off [fixed]", "hsr_fwd_offload": "off [fixed]", "hsr_dup_offload": "off [fixed]"}, "timestamping": [], "hw_timestamp_filters": []}, "ansible_docker0": {"device": "docker0", "macaddress": "02:42:58:3b:cb:92", "mtu": 1500, "active": true, "type": "bridge", "interfaces": ["vethc52cfc6"], "id": "8000.0242583bcb92", "stp": false, "speed": 10000, "promisc": false, "ipv4": {"address": "172.17.0.1", "broadcast": "172.17.255.255", "netmask": "255.255.0.0", "network": "172.17.0.0", "prefix": "16"}, "ipv6": [{"address": "fe80::42:58ff:fe3b:cb92", "prefix": "64", "scope": "link"}], "features": {"rx_checksumming": "off [fixed]", "tx_checksumming": "on", "tx_checksum_ipv4": "off [fixed]", "tx_checksum_ip_generic": "on", "tx_checksum_ipv6": "off [fixed]", "tx_checksum_fcoe_crc": "off [fixed]", "tx_checksum_sctp": "off [fixed]", "scatter_gather": "on", "tx_scatter_gather": "on", "tx_scatter_gather_fraglist": "on", "tcp_segmentation_offload": "on", "tx_tcp_segmentation": "on", "tx_tcp_ecn_segmentation": "on", "tx_tcp_mangleid_segmentation": "on", "tx_tcp6_segmentation": "on", "generic_segmentation_offload": "on", "generic_receive_offload": "on", "large_receive_offload": "off [fixed]", "rx_vlan_offload": "off [fixed]", "tx_vlan_offload": "on", "ntuple_filters": "off [fixed]", "receive_hashing": "off [fixed]", "highdma": "on", "rx_vlan_filter": "off [fixed]", "vlan_challenged": "off [fixed]", "tx_lockless": "on [fixed]", "netns_local": "on [fixed]", "tx_gso_robust": "off [requested on]", "tx_fcoe_segmentation": "off [requested on]", "tx_gre_segmentation": "on", "tx_gre_csum_segmentation": "on", "tx_ipxip4_segmentation": "on", "tx_ipxip6_segmentation": "on", "tx_udp_tnl_segmentation": "on", "tx_udp_tnl_csum_segmentation": "on", "tx_gso_partial": "on", "tx_tunnel_remcsum_segmentation": "on", "tx_sctp_segmentation": "on", "tx_esp_segmentation": "on", "tx_udp_segmentation": "on", "tx_gso_list": "on", "fcoe_mtu": "off [fixed]", "tx_nocache_copy": "off", "loopback": "off [fixed]", "rx_fcs": "off [fixed]", "rx_all": "off [fixed]", "tx_vlan_stag_hw_insert": "on", "rx_vlan_stag_hw_parse": "off [fixed]", "rx_vlan_stag_filter": "off [fixed]", "l2_fwd_offload": "off [fixed]", "hw_tc_offload": "off [fixed]", "esp_hw_offload": "off [fixed]", "esp_tx_csum_hw_offload": "off [fixed]", "rx_udp_tunnel_port_offload": "off [fixed]", "tls_hw_tx_offload": "off [fixed]", "tls_hw_rx_offload": "off [fixed]", "rx_gro_hw": "off [fixed]", "tls_hw_record": "off [fixed]", "rx_gro_list": "off", "macsec_hw_offload": "off [fixed]", "rx_udp_gro_forwarding": "off", "hsr_tag_ins_offload": "off [fixed]", "hsr_tag_rm_offload": "off [fixed]", "hsr_fwd_offload": "off [fixed]", "hsr_dup_offload": "off [fixed]"}, "timestamping": [], "hw_timestamp_filters": []}, "ansible_eth1": {"device": "eth1", "macaddress": "08:00:27:d3:5a:92", "mtu": 1500, "active": true, "module": "e1000", "type": "ether", "pciid": "0000:00:08.0", "speed": 1000, "promisc": false, "ipv4": {"address": "192.168.33.10", "broadcast": "192.168.33.255", "netmask": "255.255.255.0", "network": "192.168.33.0", "prefix": "24"}, "ipv6": [{"address": "fe80::a00:27ff:fed3:5a92", "prefix": "64", "scope": "link"}], "features": {"rx_checksumming": "off", "tx_checksumming": "on", "tx_checksum_ipv4": "off [fixed]", "tx_checksum_ip_generic": "on", "tx_checksum_ipv6": "off [fixed]", "tx_checksum_fcoe_crc": "off [fixed]", "tx_checksum_sctp": "off [fixed]", "scatter_gather": "on", "tx_scatter_gather": "on", "tx_scatter_gather_fraglist": "off [fixed]", "tcp_segmentation_offload": "on", "tx_tcp_segmentation": "on", "tx_tcp_ecn_segmentation": "off [fixed]", "tx_tcp_mangleid_segmentation": "off", "tx_tcp6_segmentation": "off [fixed]", "generic_segmentation_offload": "on", "generic_receive_offload": "on", "large_receive_offload": "off [fixed]", "rx_vlan_offload": "on", "tx_vlan_offload": "on [fixed]", "ntuple_filters": "off [fixed]", "receive_hashing": "off [fixed]", "highdma": "off [fixed]", "rx_vlan_filter": "on [fixed]", "vlan_challenged": "off [fixed]", "tx_lockless": "off [fixed]", "netns_local": "off [fixed]", "tx_gso_robust": "off [fixed]", "tx_fcoe_segmentation": "off [fixed]", "tx_gre_segmentation": "off [fixed]", "tx_gre_csum_segmentation": "off [fixed]", "tx_ipxip4_segmentation": "off [fixed]", "tx_ipxip6_segmentation": "off [fixed]", "tx_udp_tnl_segmentation": "off [fixed]", "tx_udp_tnl_csum_segmentation": "off [fixed]", "tx_gso_partial": "off [fixed]", "tx_tunnel_remcsum_segmentation": "off [fixed]", "tx_sctp_segmentation": "off [fixed]", "tx_esp_segmentation": "off [fixed]", "tx_udp_segmentation": "off [fixed]", "tx_gso_list": "off [fixed]", "fcoe_mtu": "off [fixed]", "tx_nocache_copy": "off", "loopback": "off [fixed]", "rx_fcs": "off", "rx_all": "off", "tx_vlan_stag_hw_insert": "off [fixed]", "rx_vlan_stag_hw_parse": "off [fixed]", "rx_vlan_stag_filter": "off [fixed]", "l2_fwd_offload": "off [fixed]", "hw_tc_offload": "off [fixed]", "esp_hw_offload": "off [fixed]", "esp_tx_csum_hw_offload": "off [fixed]", "rx_udp_tunnel_port_offload": "off [fixed]", "tls_hw_tx_offload": "off [fixed]", "tls_hw_rx_offload": "off [fixed]", "rx_gro_hw": "off [fixed]", "tls_hw_record": "off [fixed]", "rx_gro_list": "off", "macsec_hw_offload": "off [fixed]", "rx_udp_gro_forwarding": "off", "hsr_tag_ins_offload": "off [fixed]", "hsr_tag_rm_offload": "off [fixed]", "hsr_fwd_offload": "off [fixed]", "hsr_dup_offload": "off [fixed]"}, "timestamping": [], "hw_timestamp_filters": []}, "ansible_vethc52cfc6": {"device": "vethc52cfc6", "macaddress": "e2:90:b5:88:55:4a", "mtu": 1500, "active": true, "type": "ether", "speed": 10000, "promisc": true, "ipv6": [{"address": "fe80::e090:b5ff:fe88:554a", "prefix": "64", "scope": "link"}], "features": {"rx_checksumming": "on", "tx_checksumming": "on", "tx_checksum_ipv4": "off [fixed]", "tx_checksum_ip_generic": "on", "tx_checksum_ipv6": "off [fixed]", "tx_checksum_fcoe_crc": "off [fixed]", "tx_checksum_sctp": "on", "scatter_gather": "on", "tx_scatter_gather": "on", "tx_scatter_gather_fraglist": "on", "tcp_segmentation_offload": "on", "tx_tcp_segmentation": "on", "tx_tcp_ecn_segmentation": "on", "tx_tcp_mangleid_segmentation": "on", "tx_tcp6_segmentation": "on", "generic_segmentation_offload": "on", "generic_receive_offload": "off", "large_receive_offload": "off [fixed]", "rx_vlan_offload": "on", "tx_vlan_offload": "on", "ntuple_filters": "off [fixed]", "receive_hashing": "off [fixed]", "highdma": "on", "rx_vlan_filter": "off [fixed]", "vlan_challenged": "off [fixed]", "tx_lockless": "on [fixed]", "netns_local": "off [fixed]", "tx_gso_robust": "off [fixed]", "tx_fcoe_segmentation": "off [fixed]", "tx_gre_segmentation": "on", "tx_gre_csum_segmentation": "on", "tx_ipxip4_segmentation": "on", "tx_ipxip6_segmentation": "on", "tx_udp_tnl_segmentation": "on", "tx_udp_tnl_csum_segmentation": "on", "tx_gso_partial": "off [fixed]", "tx_tunnel_remcsum_segmentation": "off [fixed]", "tx_sctp_segmentation": "on", "tx_esp_segmentation": "off [fixed]", "tx_udp_segmentation": "on", "tx_gso_list": "on", "fcoe_mtu": "off [fixed]", "tx_nocache_copy": "off", "loopback": "off [fixed]", "rx_fcs": "off [fixed]", "rx_all": "off [fixed]", "tx_vlan_stag_hw_insert": "on", "rx_vlan_stag_hw_parse": "on", "rx_vlan_stag_filter": "off [fixed]", "l2_fwd_offload": "off [fixed]", "hw_tc_offload": "off [fixed]", "esp_hw_offload": "off [fixed]", "esp_tx_csum_hw_offload": "off [fixed]", "rx_udp_tunnel_port_offload": "off [fixed]", "tls_hw_tx_offload": "off [fixed]", "tls_hw_rx_offload": "off [fixed]", "rx_gro_hw": "off [fixed]", "tls_hw_record": "off [fixed]", "rx_gro_list": "off", "macsec_hw_offload": "off [fixed]", "rx_udp_gro_forwarding": "off", "hsr_tag_ins_offload": "off [fixed]", "hsr_tag_rm_offload": "off [fixed]", "hsr_fwd_offload": "off [fixed]", "hsr_dup_offload": "off [fixed]"}, "timestamping": [], "hw_timestamp_filters": []}, "ansible_default_ipv4": {"gateway": "10.0.2.2", "interface": "eth0", "address": "10.0.2.15", "broadcast": "", "netmask": "255.255.255.0", "network": "10.0.2.0", "prefix": "24", "macaddress": "08:00:27:a0:e5:9c", "mtu": 1500, "type": "ether", "alias": "eth0"}, "ansible_default_ipv6": {}, "ansible_all_ipv4_addresses": ["192.168.122.1", "10.0.2.15", "172.17.0.1", "192.168.33.10"], "ansible_all_ipv6_addresses": ["fe80::a00:27ff:fea0:e59c", "fe80::42:58ff:fe3b:cb92", "fe80::a00:27ff:fed3:5a92", "fe80::e090:b5ff:fe88:554a"], "ansible_locally_reachable_ips": {"ipv4": ["10.0.2.15", "127.0.0.0/8", "127.0.0.1", "172.17.0.1", "192.168.33.10", "192.168.122.1"], "ipv6": ["::1", "fe80::42:58ff:fe3b:cb92", "fe80::a00:27ff:fea0:e59c", "fe80::a00:27ff:fed3:5a92", "fe80::e090:b5ff:fe88:554a"]}, "ansible_local": {}, "ansible_dns": {"nameservers": ["8.8.8.8", "8.8.4.4", "127.0.0.53"]}, "ansible_fips": false, "ansible_is_chroot": false, "ansible_iscsi_iqn": "iqn.2004-10.com.ubuntu:01:e7f6625b59c", "ansible_service_mgr": "systemd", "ansible_date_time": {"year": "2024", "month": "03", "weekday": "Thursday", "weekday_number": "4", "weeknumber": "13", "day": "28", "hour": "08", "minute": "49", "second": "26", "epoch": "1711615766", "epoch_int": "1711615766", "date": "2024-03-28", "time": "08:49:26", "iso8601_micro": "2024-03-28T08:49:26.693424Z", "iso8601": "2024-03-28T08:49:26Z", "iso8601_basic": "20240328T084926693424", "iso8601_basic_short": "20240328T084926", "tz": "UTC", "tz_dst": "UTC", "tz_offset": "+0000"}, "ansible_cmdline": {"BOOT_IMAGE": "/vmlinuz-6.2.0-34-generic", "root": "UUID=99e38ad8-4d75-48ef-b45f-05211e28326e", "ro": true, "net.ifnames": "0", "biosdevname": "0", "systemd.unified_cgroup_hierarchy": "0"}, "ansible_proc_cmdline": {"BOOT_IMAGE": "/vmlinuz-6.2.0-34-generic", "root": "UUID=99e38ad8-4d75-48ef-b45f-05211e28326e", "ro": true, "net.ifnames": ["0", "0"], "biosdevname": ["0", "0"], "systemd.unified_cgroup_hierarchy": ["0", "0"]}, "ansible_env": {"SUDO_GID": "0", "MAIL": "/var/mail/root", "USER": "root", "HOME": "/root", "SUDO_UID": "0", "LOGNAME": "root", "TERM": "unknown", "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin", "LANG": "en_US.UTF-8", "SUDO_COMMAND": "/bin/sh -c echo BECOME-SUCCESS-rchtjqrkljrfbzfigogxlbhmmowfkpda ; /usr/bin/python3", "SHELL": "/bin/bash", "SUDO_USER": "root", "PWD": "/root"}, "ansible_hostnqn": "", "ansible_selinux_python_present": true, "ansible_selinux": {"status": "disabled"}, "ansible_pkg_mgr": "apt", "gather_subset": ["all"], "module_setup": true}, "invocation": {"module_args": {"gather_subset": ["all"], "gather_timeout": 10, "filter": [], "fact_path": "/etc/ansible/facts.d"}}}\n', b'')[0m
+[0;32mok: [ubuntu-server][0m
+
+TASK [sonarqube : Update all packages] *****************************************
+[1;30mtask path: /root/ansible/sonarqube-lab/sonarqube/tasks/main.yml:3[0m
+[0;34mUsing module file /usr/local/share/pipx/venvs/ansible/lib/python3.10/site-packages/ansible/modules/apt.py[0m
+[0;34mPipelining is enabled.[0m
+[0;34m<ubuntu-server> ESTABLISH SSH CONNECTION FOR USER: None[0m
+[0;34m<ubuntu-server> SSH: EXEC ssh -o ControlMaster=auto -o ControlPersist=600s -o StrictHostKeyChecking=no -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o ConnectTimeout=10 -o 'ControlPath="/root/.ansible/cp/%h-%p-%r"' ubuntu-server '/bin/sh -c '"'"'sudo -H -S -n  -u root /bin/sh -c '"'"'"'"'"'"'"'"'echo BECOME-SUCCESS-nvvmfytkubgqzaihghjjdervtvouipni ; /usr/bin/python3'"'"'"'"'"'"'"'"' && sleep 0'"'"''[0m
+[0;34mEscalation succeeded[0m
+[0;34m<ubuntu-server> (0, b'\n{"changed": false, "msg": "Reading package lists...\\nBuilding dependency tree...\\nReading state information...\\nCalculating upgrade...\\nThe following packages were automatically installed and are no longer required:\\n  libllvm14 libthrift-0.16.0 linux-headers-5.15.0-86\\n  linux-headers-5.15.0-86-generic linux-image-5.15.0-86-generic\\n  linux-modules-5.15.0-86-generic linux-modules-extra-5.15.0-86-generic\\n  python3-colorama\\nUse \'sudo apt autoremove\' to remove them.\\nThe following packages have been kept back:\\n  ansible ansible-core git\\n0 upgraded, 0 newly installed, 0 to remove and 3 not upgraded.\\n", "stdout": "Reading package lists...\\nBuilding dependency tree...\\nReading state information...\\nCalculating upgrade...\\nThe following packages were automatically installed and are no longer required:\\n  libllvm14 libthrift-0.16.0 linux-headers-5.15.0-86\\n  linux-headers-5.15.0-86-generic linux-image-5.15.0-86-generic\\n  linux-modules-5.15.0-86-generic linux-modules-extra-5.15.0-86-generic\\n  python3-colorama\\nUse \'sudo apt autoremove\' to remove them.\\nThe following packages have been kept back:\\n  ansible ansible-core git\\n0 upgraded, 0 newly installed, 0 to remove and 3 not upgraded.\\n", "stderr": "", "invocation": {"module_args": {"upgrade": "dist", "state": "present", "update_cache_retries": 5, "update_cache_retry_max_delay": 12, "cache_valid_time": 0, "purge": false, "force": false, "dpkg_options": "force-confdef,force-confold", "autoremove": false, "autoclean": false, "fail_on_autoremove": false, "only_upgrade": false, "force_apt_get": false, "clean": false, "allow_unauthenticated": false, "allow_downgrade": false, "allow_change_held_packages": false, "lock_timeout": 60, "update_cache": null, "package": null, "deb": null, "default_release": null, "install_recommends": null, "policy_rc_d": null}}}\n', b'')[0m
+[0;32mok: [ubuntu-server] => {[0m
+[0;32m    "changed": false,[0m
+[0;32m    "invocation": {[0m
+[0;32m        "module_args": {[0m
+[0;32m            "allow_change_held_packages": false,[0m
+[0;32m            "allow_downgrade": false,[0m
+[0;32m            "allow_unauthenticated": false,[0m
+[0;32m            "autoclean": false,[0m
+[0;32m            "autoremove": false,[0m
+[0;32m            "cache_valid_time": 0,[0m
+[0;32m            "clean": false,[0m
+[0;32m            "deb": null,[0m
+[0;32m            "default_release": null,[0m
+[0;32m            "dpkg_options": "force-confdef,force-confold",[0m
+[0;32m            "fail_on_autoremove": false,[0m
+[0;32m            "force": false,[0m
+[0;32m            "force_apt_get": false,[0m
+[0;32m            "install_recommends": null,[0m
+[0;32m            "lock_timeout": 60,[0m
+[0;32m            "only_upgrade": false,[0m
+[0;32m            "package": null,[0m
+[0;32m            "policy_rc_d": null,[0m
+[0;32m            "purge": false,[0m
+[0;32m            "state": "present",[0m
+[0;32m            "update_cache": null,[0m
+[0;32m            "update_cache_retries": 5,[0m
+[0;32m            "update_cache_retry_max_delay": 12,[0m
+[0;32m            "upgrade": "dist"[0m
+[0;32m        }[0m
+[0;32m    },[0m
+[0;32m    "msg": "Reading package lists...\nBuilding dependency tree...\nReading state information...\nCalculating upgrade...\nThe following packages were automatically installed and are no longer required:\n  libllvm14 libthrift-0.16.0 linux-headers-5.15.0-86\n  linux-headers-5.15.0-86-generic linux-image-5.15.0-86-generic\n  linux-modules-5.15.0-86-generic linux-modules-extra-5.15.0-86-generic\n  python3-colorama\nUse 'sudo apt autoremove' to remove them.\nThe following packages have been kept back:\n  ansible ansible-core git\n0 upgraded, 0 newly installed, 0 to remove and 3 not upgraded.\n",[0m
+[0;32m    "stderr": "",[0m
+[0;32m    "stderr_lines": [],[0m
+[0;32m    "stdout": "Reading package lists...\nBuilding dependency tree...\nReading state information...\nCalculating upgrade...\nThe following packages were automatically installed and are no longer required:\n  libllvm14 libthrift-0.16.0 linux-headers-5.15.0-86\n  linux-headers-5.15.0-86-generic linux-image-5.15.0-86-generic\n  linux-modules-5.15.0-86-generic linux-modules-extra-5.15.0-86-generic\n  python3-colorama\nUse 'sudo apt autoremove' to remove them.\nThe following packages have been kept back:\n  ansible ansible-core git\n0 upgraded, 0 newly installed, 0 to remove and 3 not upgraded.\n",[0m
+[0;32m    "stdout_lines": [[0m
+[0;32m        "Reading package lists...",[0m
+[0;32m        "Building dependency tree...",[0m
+[0;32m        "Reading state information...",[0m
+[0;32m        "Calculating upgrade...",[0m
+[0;32m        "The following packages were automatically installed and are no longer required:",[0m
+[0;32m        "  libllvm14 libthrift-0.16.0 linux-headers-5.15.0-86",[0m
+[0;32m        "  linux-headers-5.15.0-86-generic linux-image-5.15.0-86-generic",[0m
+[0;32m        "  linux-modules-5.15.0-86-generic linux-modules-extra-5.15.0-86-generic",[0m
+[0;32m        "  python3-colorama",[0m
+[0;32m        "Use 'sudo apt autoremove' to remove them.",[0m
+[0;32m        "The following packages have been kept back:",[0m
+[0;32m        "  ansible ansible-core git",[0m
+[0;32m        "0 upgraded, 0 newly installed, 0 to remove and 3 not upgraded."[0m
+[0;32m    ][0m
+[0;32m}[0m
+
+TASK [sonarqube : Display Ansible facts] ***************************************
+[1;30mtask path: /root/ansible/sonarqube-lab/sonarqube/tasks/main.yml:7[0m
+[0;34mUsing module file /usr/local/share/pipx/venvs/ansible/lib/python3.10/site-packages/ansible/modules/setup.py[0m
+[0;34mPipelining is enabled.[0m
+[0;34m<ubuntu-server> ESTABLISH SSH CONNECTION FOR USER: None[0m
+[0;34m<ubuntu-server> SSH: EXEC ssh -o ControlMaster=auto -o ControlPersist=600s -o StrictHostKeyChecking=no -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o ConnectTimeout=10 -o 'ControlPath="/root/.ansible/cp/%h-%p-%r"' ubuntu-server '/bin/sh -c '"'"'sudo -H -S -n  -u root /bin/sh -c '"'"'"'"'"'"'"'"'echo BECOME-SUCCESS-jycrfpzfdxvhjrijeqeejcbeibwrszxy ; /usr/bin/python3'"'"'"'"'"'"'"'"' && sleep 0'"'"''[0m
+[0;34mEscalation succeeded[0m
+[0;34m<ubuntu-server> (0, b'\n{"ansible_facts": {"ansible_dns": {"nameservers": ["8.8.8.8", "8.8.4.4", "127.0.0.53"]}, "ansible_system_capabilities_enforced": "False", "ansible_system_capabilities": [], "ansible_ssh_host_key_dsa_public": "AAAAB3NzaC1kc3MAAACBAMMDO+UXVXskIFyZTuyVKRnlDndZxRn6TrURGK0kWHIxk3tbyss/6p3+HWpurgZ4FRP1cAMtT+L0jtDu09j0oMuxdYa1MVAcv9eu8W6pppZWwjTEcuOHOhF09FZwPeYjrKv05hwQXYl1Aydy9GMmAY/lh1cjjq1acROE23F5+AFJAAAAFQCVmlgEeYr3Vy4N6Ynp7WWUHSRwKQAAAIEAgCmnDbigs4OTmrs87P9xr+cH5tsgSdp2aNVLXlCdifpOh4jqu8Fuc4DJlaJT64H5KAfMYqbFIIFYgzx35F8xlsdPw+W0ErKR5aG8y8S0zueeNRJiS+WtRfbZD68737jrJR9XLKxkXlLui2Po2j6bRI1DdE8dXKfrlZND+f/Lr4IAAACAdnZO2aUjzlX6Io9m1UbYogtKJ+0ca+m2l0DEWsjgbCaq70cL2UhGK+kmtFYarPer/0z86doT34SqgHqsWDxax64+Ra6qPX5rZfNpNTT5BF40FYxqP+t8OF+pqsrdv73kT9pm5fAotkcHpkMvUbYuF36nK+88gzRvrp8hfOad2Jo=", "ansible_ssh_host_key_dsa_public_keytype": "ssh-dss", "ansible_ssh_host_key_rsa_public": "AAAAB3NzaC1yc2EAAAADAQABAAABgQCSMquy1M6rfNGnwTUNb0dVXA1Dc/Av1/kkyhiZCYigvadw5cwV07KNtMIYApQlkGQmchUukKcpVGOQ+m2e9u7WsXs77pMxNLKNR2vtcOgMlZoVWSsyRHZkTJ+AyB6kM2bQieqs9Jh0mlPy0fVD73MbLlzwAA4aIzRgNtuGRkQtn+3BNUcGjmhiFY6HVqI5KykwJ/VceRGIExLMy3HWirgtHwA7lLp3Y9u3QIkbBbQbCMvnggAPKozdYB7H+DmobFn3CZubVbdAs7jTrNRQT5P8OqMXtwRQpzuqFcX89idnijk6JYrSXhsZBLLYlfDeRZnn3+BnUB49FUJO2xk9TisSAyxv438IuG+sl3Qp0HUbJ8w7qY5jI1TaiUt6hYGpbvM/7O4SSE3mq5ZFF7kYgxC5JJzkeg0dXSAw1j0KnPbzn0rHEOzdGVJ4Pv4uZ9N/7hYAC+hgaUggvW3b/EXB2V+o7OHTDynv2YWjLFiIb7iEzB7csgIJ5SifGt5XgR+43ks=", "ansible_ssh_host_key_rsa_public_keytype": "ssh-rsa", "ansible_ssh_host_key_ecdsa_public": "AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBIeCk914i4RBmbm0IQGyZMjG2D5M1q78Nv5Hew0VV3oxn5PykgiCVAftzNVfd4Qez0lFZwVqfhkIQJd5Lik27EU=", "ansible_ssh_host_key_ecdsa_public_keytype": "ecdsa-sha2-nistp256", "ansible_ssh_host_key_ed25519_public": "AAAAC3NzaC1lZDI1NTE5AAAAIGhQMzH8TVowqk96IfU+Ib6y1zbzUe7szy7Wj29kOpYe", "ansible_ssh_host_key_ed25519_public_keytype": "ssh-ed25519", "ansible_lsb": {"id": "Ubuntu", "description": "Ubuntu 22.04.4 LTS", "release": "22.04", "codename": "jammy", "major_release": "22"}, "ansible_selinux_python_present": true, "ansible_selinux": {"status": "disabled"}, "ansible_user_id": "root", "ansible_user_uid": 0, "ansible_user_gid": 0, "ansible_user_gecos": "root", "ansible_user_dir": "/root", "ansible_user_shell": "/bin/bash", "ansible_real_user_id": 0, "ansible_effective_user_id": 0, "ansible_real_group_id": 0, "ansible_effective_group_id": 0, "ansible_env": {"SUDO_GID": "0", "MAIL": "/var/mail/root", "USER": "root", "HOME": "/root", "SUDO_UID": "0", "LOGNAME": "root", "TERM": "unknown", "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin", "LANG": "en_US.UTF-8", "SUDO_COMMAND": "/bin/sh -c echo BECOME-SUCCESS-jycrfpzfdxvhjrijeqeejcbeibwrszxy ; /usr/bin/python3", "SHELL": "/bin/bash", "SUDO_USER": "root", "PWD": "/root"}, "ansible_fibre_channel_wwn": [], "ansible_is_chroot": false, "ansible_fips": false, "ansible_iscsi_iqn": "iqn.2004-10.com.ubuntu:01:e7f6625b59c", "ansible_system": "Linux", "ansible_kernel": "6.2.0-34-generic", "ansible_kernel_version": "#34~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Thu Sep  7 13:12:03 UTC 2", "ansible_machine": "x86_64", "ansible_python_version": "3.10.12", "ansible_fqdn": "ubuntu-server", "ansible_hostname": "ubuntu-server", "ansible_nodename": "ubuntu-server", "ansible_domain": "", "ansible_userspace_bits": "64", "ansible_architecture": "x86_64", "ansible_userspace_architecture": "x86_64", "ansible_machine_id": "6ea8233619364e2c9732855f50e1d6a7", "ansible_hostnqn": "", "ansible_loadavg": {"1m": 0.283203125, "5m": 0.236328125, "15m": 0.1376953125}, "ansible_apparmor": {"status": "enabled"}, "ansible_virtualization_role": "guest", "ansible_virtualization_type": "virtualbox", "ansible_virtualization_tech_guest": ["virtualbox"], "ansible_virtualization_tech_host": ["virtualbox"], "ansible_cmdline": {"BOOT_IMAGE": "/vmlinuz-6.2.0-34-generic", "root": "UUID=99e38ad8-4d75-48ef-b45f-05211e28326e", "ro": true, "net.ifnames": "0", "biosdevname": "0", "systemd.unified_cgroup_hierarchy": "0"}, "ansible_proc_cmdline": {"BOOT_IMAGE": "/vmlinuz-6.2.0-34-generic", "root": "UUID=99e38ad8-4d75-48ef-b45f-05211e28326e", "ro": true, "net.ifnames": ["0", "0"], "biosdevname": ["0", "0"], "systemd.unified_cgroup_hierarchy": ["0", "0"]}, "ansible_distribution": "Ubuntu", "ansible_distribution_release": "jammy", "ansible_distribution_version": "22.04", "ansible_distribution_major_version": "22", "ansible_distribution_file_path": "/etc/os-release", "ansible_distribution_file_variety": "Debian", "ansible_distribution_file_parsed": true, "ansible_os_family": "Debian", "ansible_processor": ["0", "AuthenticAMD", "AMD Ryzen 5 5500U with Radeon Graphics", "1", "AuthenticAMD", "AMD Ryzen 5 5500U with Radeon Graphics"], "ansible_processor_count": 1, "ansible_processor_cores": 2, "ansible_processor_threads_per_core": 1, "ansible_processor_vcpus": 2, "ansible_processor_nproc": 2, "ansible_memtotal_mb": 1959, "ansible_memfree_mb": 92, "ansible_swaptotal_mb": 8191, "ansible_swapfree_mb": 8073, "ansible_memory_mb": {"real": {"total": 1959, "used": 1867, "free": 92}, "nocache": {"free": 213, "used": 1746}, "swap": {"total": 8191, "free": 8073, "used": 118, "cached": 25}}, "ansible_bios_date": "12/01/2006", "ansible_bios_vendor": "innotek GmbH", "ansible_bios_version": "VirtualBox", "ansible_board_asset_tag": "NA", "ansible_board_name": "VirtualBox", "ansible_board_serial": "0", "ansible_board_vendor": "Oracle Corporation", "ansible_board_version": "1.2", "ansible_chassis_asset_tag": "NA", "ansible_chassis_serial": "NA", "ansible_chassis_vendor": "Oracle Corporation", "ansible_chassis_version": "NA", "ansible_form_factor": "Other", "ansible_product_name": "VirtualBox", "ansible_product_serial": "0", "ansible_product_uuid": "3e67c570-5b7d-4e4e-8401-33852ee7609b", "ansible_product_version": "1.2", "ansible_system_vendor": "innotek GmbH", "ansible_devices": {"loop1": {"virtual": 1, "links": {"ids": [], "uuids": [], "labels": [], "masters": []}, "vendor": null, "model": null, "sas_address": null, "sas_device_handle": null, "removable": "0", "support_discard": "0", "partitions": {}, "rotational": "1", "scheduler_mode": "none", "sectors": "0", "sectorsize": "512", "size": "0.00 Bytes", "host": "", "holders": []}, "loop6": {"virtual": 1, "links": {"ids": [], "uuids": [], "labels": [], "masters": []}, "vendor": null, "model": null, "sas_address": null, "sas_device_handle": null, "removable": "0", "support_discard": "0", "partitions": {}, "rotational": "1", "scheduler_mode": "none", "sectors": "0", "sectorsize": "512", "size": "0.00 Bytes", "host": "", "holders": []}, "loop4": {"virtual": 1, "links": {"ids": [], "uuids": [], "labels": [], "masters": []}, "vendor": null, "model": null, "sas_address": null, "sas_device_handle": null, "removable": "0", "support_discard": "0", "partitions": {}, "rotational": "1", "scheduler_mode": "none", "sectors": "0", "sectorsize": "512", "size": "0.00 Bytes", "host": "", "holders": []}, "loop2": {"virtual": 1, "links": {"ids": [], "uuids": [], "labels": [], "masters": []}, "vendor": null, "model": null, "sas_address": null, "sas_device_handle": null, "removable": "0", "support_discard": "0", "partitions": {}, "rotational": "1", "scheduler_mode": "none", "sectors": "0", "sectorsize": "512", "size": "0.00 Bytes", "host": "", "holders": []}, "loop0": {"virtual": 1, "links": {"ids": [], "uuids": [], "labels": [], "masters": []}, "vendor": null, "model": null, "sas_address": null, "sas_device_handle": null, "removable": "0", "support_discard": "0", "partitions": {}, "rotational": "1", "scheduler_mode": "none", "sectors": "0", "sectorsize": "512", "size": "0.00 Bytes", "host": "", "holders": []}, "loop7": {"virtual": 1, "links": {"ids": [], "uuids": [], "labels": [], "masters": []}, "vendor": null, "model": null, "sas_address": null, "sas_device_handle": null, "removable": "0", "support_discard": "0", "partitions": {}, "rotational": "1", "scheduler_mode": "none", "sectors": "0", "sectorsize": "512", "size": "0.00 Bytes", "host": "", "holders": []}, "sda": {"virtual": 1, "links": {"ids": ["ata-VBOX_HARDDISK_VB024ca721-d054fab5", "scsi-0ATA_VBOX_HARDDISK_VB024ca721-d054fab5", "scsi-1ATA_VBOX_HARDDISK_VB024ca721-d054fab5", "scsi-SATA_VBOX_HARDDISK_VB024ca721-d054fab5"], "uuids": [], "labels": [], "masters": []}, "vendor": "ATA", "model": "VBOX HARDDISK", "sas_address": null, "sas_device_handle": null, "serial": "VB024ca721", "removable": "0", "support_discard": "0", "partitions": {"sda4": {"links": {"ids": ["ata-VBOX_HARDDISK_VB024ca721-d054fab5-part4", "scsi-0ATA_VBOX_HARDDISK_VB024ca721-d054fab5-part4", "scsi-1ATA_VBOX_HARDDISK_VB024ca721-d054fab5-part4", "scsi-SATA_VBOX_HARDDISK_VB024ca721-d054fab5-part4"], "uuids": ["99e38ad8-4d75-48ef-b45f-05211e28326e"], "labels": [], "masters": []}, "start": "33558528", "sectors": "234874880", "sectorsize": 512, "size": "112.00 GB", "uuid": "99e38ad8-4d75-48ef-b45f-05211e28326e", "holders": []}, "sda2": {"links": {"ids": ["ata-VBOX_HARDDISK_VB024ca721-d054fab5-part2", "scsi-0ATA_VBOX_HARDDISK_VB024ca721-d054fab5-part2", "scsi-1ATA_VBOX_HARDDISK_VB024ca721-d054fab5-part2", "scsi-SATA_VBOX_HARDDISK_VB024ca721-d054fab5-part2"], "uuids": ["282842b6-71fe-4536-884f-ddc2660d7cbb"], "labels": [], "masters": []}, "start": "4096", "sectors": "16777216", "sectorsize": 512, "size": "8.00 GB", "uuid": "282842b6-71fe-4536-884f-ddc2660d7cbb", "holders": []}, "sda3": {"links": {"ids": ["ata-VBOX_HARDDISK_VB024ca721-d054fab5-part3", "scsi-0ATA_VBOX_HARDDISK_VB024ca721-d054fab5-part3", "scsi-1ATA_VBOX_HARDDISK_VB024ca721-d054fab5-part3", "scsi-SATA_VBOX_HARDDISK_VB024ca721-d054fab5-part3"], "uuids": ["3398cc71-37e4-4e32-80dc-40e5ac8daf03"], "labels": [], "masters": []}, "start": "16781312", "sectors": "16777216", "sectorsize": 512, "size": "8.00 GB", "uuid": "3398cc71-37e4-4e32-80dc-40e5ac8daf03", "holders": []}, "sda1": {"links": {"ids": ["ata-VBOX_HARDDISK_VB024ca721-d054fab5-part1", "scsi-0ATA_VBOX_HARDDISK_VB024ca721-d054fab5-part1", "scsi-1ATA_VBOX_HARDDISK_VB024ca721-d054fab5-part1", "scsi-SATA_VBOX_HARDDISK_VB024ca721-d054fab5-part1"], "uuids": [], "labels": [], "masters": []}, "start": "2048", "sectors": "2048", "sectorsize": 512, "size": "1.00 MB", "uuid": null, "holders": []}}, "rotational": "1", "scheduler_mode": "mq-deadline", "sectors": "268435456", "sectorsize": "512", "size": "128.00 GB", "host": "IDE interface: Intel Corporation 82371AB/EB/MB PIIX4 IDE (rev 01)", "holders": []}, "loop5": {"virtual": 1, "links": {"ids": [], "uuids": [], "labels": [], "masters": []}, "vendor": null, "model": null, "sas_address": null, "sas_device_handle": null, "removable": "0", "support_discard": "0", "partitions": {}, "rotational": "1", "scheduler_mode": "none", "sectors": "0", "sectorsize": "512", "size": "0.00 Bytes", "host": "", "holders": []}, "loop3": {"virtual": 1, "links": {"ids": [], "uuids": [], "labels": [], "masters": []}, "vendor": null, "model": null, "sas_address": null, "sas_device_handle": null, "removable": "0", "support_discard": "0", "partitions": {}, "rotational": "1", "scheduler_mode": "none", "sectors": "0", "sectorsize": "512", "size": "0.00 Bytes", "host": "", "holders": []}}, "ansible_device_links": {"ids": {"sda": ["ata-VBOX_HARDDISK_VB024ca721-d054fab5", "scsi-0ATA_VBOX_HARDDISK_VB024ca721-d054fab5", "scsi-1ATA_VBOX_HARDDISK_VB024ca721-d054fab5", "scsi-SATA_VBOX_HARDDISK_VB024ca721-d054fab5"], "sda2": ["ata-VBOX_HARDDISK_VB024ca721-d054fab5-part2", "scsi-0ATA_VBOX_HARDDISK_VB024ca721-d054fab5-part2", "scsi-1ATA_VBOX_HARDDISK_VB024ca721-d054fab5-part2", "scsi-SATA_VBOX_HARDDISK_VB024ca721-d054fab5-part2"], "sda1": ["ata-VBOX_HARDDISK_VB024ca721-d054fab5-part1", "scsi-0ATA_VBOX_HARDDISK_VB024ca721-d054fab5-part1", "scsi-1ATA_VBOX_HARDDISK_VB024ca721-d054fab5-part1", "scsi-SATA_VBOX_HARDDISK_VB024ca721-d054fab5-part1"], "sda3": ["ata-VBOX_HARDDISK_VB024ca721-d054fab5-part3", "scsi-0ATA_VBOX_HARDDISK_VB024ca721-d054fab5-part3", "scsi-1ATA_VBOX_HARDDISK_VB024ca721-d054fab5-part3", "scsi-SATA_VBOX_HARDDISK_VB024ca721-d054fab5-part3"], "sda4": ["ata-VBOX_HARDDISK_VB024ca721-d054fab5-part4", "scsi-0ATA_VBOX_HARDDISK_VB024ca721-d054fab5-part4", "scsi-1ATA_VBOX_HARDDISK_VB024ca721-d054fab5-part4", "scsi-SATA_VBOX_HARDDISK_VB024ca721-d054fab5-part4"]}, "uuids": {"sda2": ["282842b6-71fe-4536-884f-ddc2660d7cbb"], "sda3": ["3398cc71-37e4-4e32-80dc-40e5ac8daf03"], "sda4": ["99e38ad8-4d75-48ef-b45f-05211e28326e"]}, "labels": {}, "masters": {}}, "ansible_uptime_seconds": 194388, "ansible_lvm": {"lvs": {}, "vgs": {}, "pvs": {}}, "ansible_mounts": [{"mount": "/", "device": "/dev/sda4", "fstype": "ext4", "options": "rw,relatime", "size_total": 117768843264, "size_available": 98072801280, "block_size": 4096, "block_total": 28752159, "block_available": 23943555, "block_used": 4808604, "inode_total": 7340032, "inode_available": 7011559, "inode_used": 328473, "uuid": "99e38ad8-4d75-48ef-b45f-05211e28326e"}, {"mount": "/boot", "device": "/dev/sda2", "fstype": "ext4", "options": "rw,relatime", "size_total": 8350298112, "size_available": 7346601984, "block_size": 4096, "block_total": 2038647, "block_available": 1793604, "block_used": 245043, "inode_total": 524288, "inode_available": 523961, "inode_used": 327, "uuid": "282842b6-71fe-4536-884f-ddc2660d7cbb"}], "ansible_interfaces": ["virbr0", "eth1", "docker0", "lo", "vethc52cfc6", "eth0"], "ansible_virbr0": {"device": "virbr0", "macaddress": "52:54:00:de:cc:5d", "mtu": 1500, "active": false, "type": "bridge", "interfaces": [], "id": "8000.525400decc5d", "stp": true, "speed": -1, "promisc": false, "ipv4": {"address": "192.168.122.1", "broadcast": "192.168.122.255", "netmask": "255.255.255.0", "network": "192.168.122.0", "prefix": "24"}, "features": {"rx_checksumming": "off [fixed]", "tx_checksumming": "on", "tx_checksum_ipv4": "off [fixed]", "tx_checksum_ip_generic": "on", "tx_checksum_ipv6": "off [fixed]", "tx_checksum_fcoe_crc": "off [fixed]", "tx_checksum_sctp": "off [fixed]", "scatter_gather": "on", "tx_scatter_gather": "on", "tx_scatter_gather_fraglist": "on", "tcp_segmentation_offload": "on", "tx_tcp_segmentation": "on", "tx_tcp_ecn_segmentation": "on", "tx_tcp_mangleid_segmentation": "on", "tx_tcp6_segmentation": "on", "generic_segmentation_offload": "on", "generic_receive_offload": "on", "large_receive_offload": "off [fixed]", "rx_vlan_offload": "off [fixed]", "tx_vlan_offload": "on", "ntuple_filters": "off [fixed]", "receive_hashing": "off [fixed]", "highdma": "on", "rx_vlan_filter": "off [fixed]", "vlan_challenged": "off [fixed]", "tx_lockless": "on [fixed]", "netns_local": "on [fixed]", "tx_gso_robust": "on", "tx_fcoe_segmentation": "on", "tx_gre_segmentation": "on", "tx_gre_csum_segmentation": "on", "tx_ipxip4_segmentation": "on", "tx_ipxip6_segmentation": "on", "tx_udp_tnl_segmentation": "on", "tx_udp_tnl_csum_segmentation": "on", "tx_gso_partial": "on", "tx_tunnel_remcsum_segmentation": "on", "tx_sctp_segmentation": "on", "tx_esp_segmentation": "on", "tx_udp_segmentation": "on", "tx_gso_list": "on", "fcoe_mtu": "off [fixed]", "tx_nocache_copy": "off", "loopback": "off [fixed]", "rx_fcs": "off [fixed]", "rx_all": "off [fixed]", "tx_vlan_stag_hw_insert": "on", "rx_vlan_stag_hw_parse": "off [fixed]", "rx_vlan_stag_filter": "off [fixed]", "l2_fwd_offload": "off [fixed]", "hw_tc_offload": "off [fixed]", "esp_hw_offload": "off [fixed]", "esp_tx_csum_hw_offload": "off [fixed]", "rx_udp_tunnel_port_offload": "off [fixed]", "tls_hw_tx_offload": "off [fixed]", "tls_hw_rx_offload": "off [fixed]", "rx_gro_hw": "off [fixed]", "tls_hw_record": "off [fixed]", "rx_gro_list": "off", "macsec_hw_offload": "off [fixed]", "rx_udp_gro_forwarding": "off", "hsr_tag_ins_offload": "off [fixed]", "hsr_tag_rm_offload": "off [fixed]", "hsr_fwd_offload": "off [fixed]", "hsr_dup_offload": "off [fixed]"}, "timestamping": [], "hw_timestamp_filters": []}, "ansible_eth0": {"device": "eth0", "macaddress": "08:00:27:a0:e5:9c", "mtu": 1500, "active": true, "module": "e1000", "type": "ether", "pciid": "0000:00:03.0", "speed": 1000, "promisc": false, "ipv4": {"address": "10.0.2.15", "broadcast": "", "netmask": "255.255.255.0", "network": "10.0.2.0", "prefix": "24"}, "ipv6": [{"address": "fe80::a00:27ff:fea0:e59c", "prefix": "64", "scope": "link"}], "features": {"rx_checksumming": "off", "tx_checksumming": "on", "tx_checksum_ipv4": "off [fixed]", "tx_checksum_ip_generic": "on", "tx_checksum_ipv6": "off [fixed]", "tx_checksum_fcoe_crc": "off [fixed]", "tx_checksum_sctp": "off [fixed]", "scatter_gather": "on", "tx_scatter_gather": "on", "tx_scatter_gather_fraglist": "off [fixed]", "tcp_segmentation_offload": "on", "tx_tcp_segmentation": "on", "tx_tcp_ecn_segmentation": "off [fixed]", "tx_tcp_mangleid_segmentation": "off", "tx_tcp6_segmentation": "off [fixed]", "generic_segmentation_offload": "on", "generic_receive_offload": "on", "large_receive_offload": "off [fixed]", "rx_vlan_offload": "on", "tx_vlan_offload": "on [fixed]", "ntuple_filters": "off [fixed]", "receive_hashing": "off [fixed]", "highdma": "off [fixed]", "rx_vlan_filter": "on [fixed]", "vlan_challenged": "off [fixed]", "tx_lockless": "off [fixed]", "netns_local": "off [fixed]", "tx_gso_robust": "off [fixed]", "tx_fcoe_segmentation": "off [fixed]", "tx_gre_segmentation": "off [fixed]", "tx_gre_csum_segmentation": "off [fixed]", "tx_ipxip4_segmentation": "off [fixed]", "tx_ipxip6_segmentation": "off [fixed]", "tx_udp_tnl_segmentation": "off [fixed]", "tx_udp_tnl_csum_segmentation": "off [fixed]", "tx_gso_partial": "off [fixed]", "tx_tunnel_remcsum_segmentation": "off [fixed]", "tx_sctp_segmentation": "off [fixed]", "tx_esp_segmentation": "off [fixed]", "tx_udp_segmentation": "off [fixed]", "tx_gso_list": "off [fixed]", "fcoe_mtu": "off [fixed]", "tx_nocache_copy": "off", "loopback": "off [fixed]", "rx_fcs": "off", "rx_all": "off", "tx_vlan_stag_hw_insert": "off [fixed]", "rx_vlan_stag_hw_parse": "off [fixed]", "rx_vlan_stag_filter": "off [fixed]", "l2_fwd_offload": "off [fixed]", "hw_tc_offload": "off [fixed]", "esp_hw_offload": "off [fixed]", "esp_tx_csum_hw_offload": "off [fixed]", "rx_udp_tunnel_port_offload": "off [fixed]", "tls_hw_tx_offload": "off [fixed]", "tls_hw_rx_offload": "off [fixed]", "rx_gro_hw": "off [fixed]", "tls_hw_record": "off [fixed]", "rx_gro_list": "off", "macsec_hw_offload": "off [fixed]", "rx_udp_gro_forwarding": "off", "hsr_tag_ins_offload": "off [fixed]", "hsr_tag_rm_offload": "off [fixed]", "hsr_fwd_offload": "off [fixed]", "hsr_dup_offload": "off [fixed]"}, "timestamping": [], "hw_timestamp_filters": []}, "ansible_lo": {"device": "lo", "mtu": 65536, "active": true, "type": "loopback", "promisc": false, "ipv4": {"address": "127.0.0.1", "broadcast": "", "netmask": "255.0.0.0", "network": "127.0.0.0", "prefix": "8"}, "ipv6": [{"address": "::1", "prefix": "128", "scope": "host"}], "features": {"rx_checksumming": "on [fixed]", "tx_checksumming": "on", "tx_checksum_ipv4": "off [fixed]", "tx_checksum_ip_generic": "on [fixed]", "tx_checksum_ipv6": "off [fixed]", "tx_checksum_fcoe_crc": "off [fixed]", "tx_checksum_sctp": "on [fixed]", "scatter_gather": "on", "tx_scatter_gather": "on [fixed]", "tx_scatter_gather_fraglist": "on [fixed]", "tcp_segmentation_offload": "on", "tx_tcp_segmentation": "on", "tx_tcp_ecn_segmentation": "on", "tx_tcp_mangleid_segmentation": "on", "tx_tcp6_segmentation": "on", "generic_segmentation_offload": "on", "generic_receive_offload": "on", "large_receive_offload": "off [fixed]", "rx_vlan_offload": "off [fixed]", "tx_vlan_offload": "off [fixed]", "ntuple_filters": "off [fixed]", "receive_hashing": "off [fixed]", "highdma": "on [fixed]", "rx_vlan_filter": "off [fixed]", "vlan_challenged": "on [fixed]", "tx_lockless": "on [fixed]", "netns_local": "on [fixed]", "tx_gso_robust": "off [fixed]", "tx_fcoe_segmentation": "off [fixed]", "tx_gre_segmentation": "off [fixed]", "tx_gre_csum_segmentation": "off [fixed]", "tx_ipxip4_segmentation": "off [fixed]", "tx_ipxip6_segmentation": "off [fixed]", "tx_udp_tnl_segmentation": "off [fixed]", "tx_udp_tnl_csum_segmentation": "off [fixed]", "tx_gso_partial": "off [fixed]", "tx_tunnel_remcsum_segmentation": "off [fixed]", "tx_sctp_segmentation": "on", "tx_esp_segmentation": "off [fixed]", "tx_udp_segmentation": "on", "tx_gso_list": "on", "fcoe_mtu": "off [fixed]", "tx_nocache_copy": "off [fixed]", "loopback": "on [fixed]", "rx_fcs": "off [fixed]", "rx_all": "off [fixed]", "tx_vlan_stag_hw_insert": "off [fixed]", "rx_vlan_stag_hw_parse": "off [fixed]", "rx_vlan_stag_filter": "off [fixed]", "l2_fwd_offload": "off [fixed]", "hw_tc_offload": "off [fixed]", "esp_hw_offload": "off [fixed]", "esp_tx_csum_hw_offload": "off [fixed]", "rx_udp_tunnel_port_offload": "off [fixed]", "tls_hw_tx_offload": "off [fixed]", "tls_hw_rx_offload": "off [fixed]", "rx_gro_hw": "off [fixed]", "tls_hw_record": "off [fixed]", "rx_gro_list": "off", "macsec_hw_offload": "off [fixed]", "rx_udp_gro_forwarding": "off", "hsr_tag_ins_offload": "off [fixed]", "hsr_tag_rm_offload": "off [fixed]", "hsr_fwd_offload": "off [fixed]", "hsr_dup_offload": "off [fixed]"}, "timestamping": [], "hw_timestamp_filters": []}, "ansible_docker0": {"device": "docker0", "macaddress": "02:42:58:3b:cb:92", "mtu": 1500, "active": true, "type": "bridge", "interfaces": ["vethc52cfc6"], "id": "8000.0242583bcb92", "stp": false, "speed": 10000, "promisc": false, "ipv4": {"address": "172.17.0.1", "broadcast": "172.17.255.255", "netmask": "255.255.0.0", "network": "172.17.0.0", "prefix": "16"}, "ipv6": [{"address": "fe80::42:58ff:fe3b:cb92", "prefix": "64", "scope": "link"}], "features": {"rx_checksumming": "off [fixed]", "tx_checksumming": "on", "tx_checksum_ipv4": "off [fixed]", "tx_checksum_ip_generic": "on", "tx_checksum_ipv6": "off [fixed]", "tx_checksum_fcoe_crc": "off [fixed]", "tx_checksum_sctp": "off [fixed]", "scatter_gather": "on", "tx_scatter_gather": "on", "tx_scatter_gather_fraglist": "on", "tcp_segmentation_offload": "on", "tx_tcp_segmentation": "on", "tx_tcp_ecn_segmentation": "on", "tx_tcp_mangleid_segmentation": "on", "tx_tcp6_segmentation": "on", "generic_segmentation_offload": "on", "generic_receive_offload": "on", "large_receive_offload": "off [fixed]", "rx_vlan_offload": "off [fixed]", "tx_vlan_offload": "on", "ntuple_filters": "off [fixed]", "receive_hashing": "off [fixed]", "highdma": "on", "rx_vlan_filter": "off [fixed]", "vlan_challenged": "off [fixed]", "tx_lockless": "on [fixed]", "netns_local": "on [fixed]", "tx_gso_robust": "off [requested on]", "tx_fcoe_segmentation": "off [requested on]", "tx_gre_segmentation": "on", "tx_gre_csum_segmentation": "on", "tx_ipxip4_segmentation": "on", "tx_ipxip6_segmentation": "on", "tx_udp_tnl_segmentation": "on", "tx_udp_tnl_csum_segmentation": "on", "tx_gso_partial": "on", "tx_tunnel_remcsum_segmentation": "on", "tx_sctp_segmentation": "on", "tx_esp_segmentation": "on", "tx_udp_segmentation": "on", "tx_gso_list": "on", "fcoe_mtu": "off [fixed]", "tx_nocache_copy": "off", "loopback": "off [fixed]", "rx_fcs": "off [fixed]", "rx_all": "off [fixed]", "tx_vlan_stag_hw_insert": "on", "rx_vlan_stag_hw_parse": "off [fixed]", "rx_vlan_stag_filter": "off [fixed]", "l2_fwd_offload": "off [fixed]", "hw_tc_offload": "off [fixed]", "esp_hw_offload": "off [fixed]", "esp_tx_csum_hw_offload": "off [fixed]", "rx_udp_tunnel_port_offload": "off [fixed]", "tls_hw_tx_offload": "off [fixed]", "tls_hw_rx_offload": "off [fixed]", "rx_gro_hw": "off [fixed]", "tls_hw_record": "off [fixed]", "rx_gro_list": "off", "macsec_hw_offload": "off [fixed]", "rx_udp_gro_forwarding": "off", "hsr_tag_ins_offload": "off [fixed]", "hsr_tag_rm_offload": "off [fixed]", "hsr_fwd_offload": "off [fixed]", "hsr_dup_offload": "off [fixed]"}, "timestamping": [], "hw_timestamp_filters": []}, "ansible_eth1": {"device": "eth1", "macaddress": "08:00:27:d3:5a:92", "mtu": 1500, "active": true, "module": "e1000", "type": "ether", "pciid": "0000:00:08.0", "speed": 1000, "promisc": false, "ipv4": {"address": "192.168.33.10", "broadcast": "192.168.33.255", "netmask": "255.255.255.0", "network": "192.168.33.0", "prefix": "24"}, "ipv6": [{"address": "fe80::a00:27ff:fed3:5a92", "prefix": "64", "scope": "link"}], "features": {"rx_checksumming": "off", "tx_checksumming": "on", "tx_checksum_ipv4": "off [fixed]", "tx_checksum_ip_generic": "on", "tx_checksum_ipv6": "off [fixed]", "tx_checksum_fcoe_crc": "off [fixed]", "tx_checksum_sctp": "off [fixed]", "scatter_gather": "on", "tx_scatter_gather": "on", "tx_scatter_gather_fraglist": "off [fixed]", "tcp_segmentation_offload": "on", "tx_tcp_segmentation": "on", "tx_tcp_ecn_segmentation": "off [fixed]", "tx_tcp_mangleid_segmentation": "off", "tx_tcp6_segmentation": "off [fixed]", "generic_segmentation_offload": "on", "generic_receive_offload": "on", "large_receive_offload": "off [fixed]", "rx_vlan_offload": "on", "tx_vlan_offload": "on [fixed]", "ntuple_filters": "off [fixed]", "receive_hashing": "off [fixed]", "highdma": "off [fixed]", "rx_vlan_filter": "on [fixed]", "vlan_challenged": "off [fixed]", "tx_lockless": "off [fixed]", "netns_local": "off [fixed]", "tx_gso_robust": "off [fixed]", "tx_fcoe_segmentation": "off [fixed]", "tx_gre_segmentation": "off [fixed]", "tx_gre_csum_segmentation": "off [fixed]", "tx_ipxip4_segmentation": "off [fixed]", "tx_ipxip6_segmentation": "off [fixed]", "tx_udp_tnl_segmentation": "off [fixed]", "tx_udp_tnl_csum_segmentation": "off [fixed]", "tx_gso_partial": "off [fixed]", "tx_tunnel_remcsum_segmentation": "off [fixed]", "tx_sctp_segmentation": "off [fixed]", "tx_esp_segmentation": "off [fixed]", "tx_udp_segmentation": "off [fixed]", "tx_gso_list": "off [fixed]", "fcoe_mtu": "off [fixed]", "tx_nocache_copy": "off", "loopback": "off [fixed]", "rx_fcs": "off", "rx_all": "off", "tx_vlan_stag_hw_insert": "off [fixed]", "rx_vlan_stag_hw_parse": "off [fixed]", "rx_vlan_stag_filter": "off [fixed]", "l2_fwd_offload": "off [fixed]", "hw_tc_offload": "off [fixed]", "esp_hw_offload": "off [fixed]", "esp_tx_csum_hw_offload": "off [fixed]", "rx_udp_tunnel_port_offload": "off [fixed]", "tls_hw_tx_offload": "off [fixed]", "tls_hw_rx_offload": "off [fixed]", "rx_gro_hw": "off [fixed]", "tls_hw_record": "off [fixed]", "rx_gro_list": "off", "macsec_hw_offload": "off [fixed]", "rx_udp_gro_forwarding": "off", "hsr_tag_ins_offload": "off [fixed]", "hsr_tag_rm_offload": "off [fixed]", "hsr_fwd_offload": "off [fixed]", "hsr_dup_offload": "off [fixed]"}, "timestamping": [], "hw_timestamp_filters": []}, "ansible_vethc52cfc6": {"device": "vethc52cfc6", "macaddress": "e2:90:b5:88:55:4a", "mtu": 1500, "active": true, "type": "ether", "speed": 10000, "promisc": true, "ipv6": [{"address": "fe80::e090:b5ff:fe88:554a", "prefix": "64", "scope": "link"}], "features": {"rx_checksumming": "on", "tx_checksumming": "on", "tx_checksum_ipv4": "off [fixed]", "tx_checksum_ip_generic": "on", "tx_checksum_ipv6": "off [fixed]", "tx_checksum_fcoe_crc": "off [fixed]", "tx_checksum_sctp": "on", "scatter_gather": "on", "tx_scatter_gather": "on", "tx_scatter_gather_fraglist": "on", "tcp_segmentation_offload": "on", "tx_tcp_segmentation": "on", "tx_tcp_ecn_segmentation": "on", "tx_tcp_mangleid_segmentation": "on", "tx_tcp6_segmentation": "on", "generic_segmentation_offload": "on", "generic_receive_offload": "off", "large_receive_offload": "off [fixed]", "rx_vlan_offload": "on", "tx_vlan_offload": "on", "ntuple_filters": "off [fixed]", "receive_hashing": "off [fixed]", "highdma": "on", "rx_vlan_filter": "off [fixed]", "vlan_challenged": "off [fixed]", "tx_lockless": "on [fixed]", "netns_local": "off [fixed]", "tx_gso_robust": "off [fixed]", "tx_fcoe_segmentation": "off [fixed]", "tx_gre_segmentation": "on", "tx_gre_csum_segmentation": "on", "tx_ipxip4_segmentation": "on", "tx_ipxip6_segmentation": "on", "tx_udp_tnl_segmentation": "on", "tx_udp_tnl_csum_segmentation": "on", "tx_gso_partial": "off [fixed]", "tx_tunnel_remcsum_segmentation": "off [fixed]", "tx_sctp_segmentation": "on", "tx_esp_segmentation": "off [fixed]", "tx_udp_segmentation": "on", "tx_gso_list": "on", "fcoe_mtu": "off [fixed]", "tx_nocache_copy": "off", "loopback": "off [fixed]", "rx_fcs": "off [fixed]", "rx_all": "off [fixed]", "tx_vlan_stag_hw_insert": "on", "rx_vlan_stag_hw_parse": "on", "rx_vlan_stag_filter": "off [fixed]", "l2_fwd_offload": "off [fixed]", "hw_tc_offload": "off [fixed]", "esp_hw_offload": "off [fixed]", "esp_tx_csum_hw_offload": "off [fixed]", "rx_udp_tunnel_port_offload": "off [fixed]", "tls_hw_tx_offload": "off [fixed]", "tls_hw_rx_offload": "off [fixed]", "rx_gro_hw": "off [fixed]", "tls_hw_record": "off [fixed]", "rx_gro_list": "off", "macsec_hw_offload": "off [fixed]", "rx_udp_gro_forwarding": "off", "hsr_tag_ins_offload": "off [fixed]", "hsr_tag_rm_offload": "off [fixed]", "hsr_fwd_offload": "off [fixed]", "hsr_dup_offload": "off [fixed]"}, "timestamping": [], "hw_timestamp_filters": []}, "ansible_default_ipv4": {"gateway": "10.0.2.2", "interface": "eth0", "address": "10.0.2.15", "broadcast": "", "netmask": "255.255.255.0", "network": "10.0.2.0", "prefix": "24", "macaddress": "08:00:27:a0:e5:9c", "mtu": 1500, "type": "ether", "alias": "eth0"}, "ansible_default_ipv6": {}, "ansible_all_ipv4_addresses": ["192.168.122.1", "10.0.2.15", "172.17.0.1", "192.168.33.10"], "ansible_all_ipv6_addresses": ["fe80::a00:27ff:fea0:e59c", "fe80::42:58ff:fe3b:cb92", "fe80::a00:27ff:fed3:5a92", "fe80::e090:b5ff:fe88:554a"], "ansible_locally_reachable_ips": {"ipv4": ["10.0.2.15", "127.0.0.0/8", "127.0.0.1", "172.17.0.1", "192.168.33.10", "192.168.122.1"], "ipv6": ["::1", "fe80::42:58ff:fe3b:cb92", "fe80::a00:27ff:fea0:e59c", "fe80::a00:27ff:fed3:5a92", "fe80::e090:b5ff:fe88:554a"]}, "ansible_local": {}, "ansible_date_time": {"year": "2024", "month": "03", "weekday": "Thursday", "weekday_number": "4", "weeknumber": "13", "day": "28", "hour": "08", "minute": "49", "second": "37", "epoch": "1711615777", "epoch_int": "1711615777", "date": "2024-03-28", "time": "08:49:37", "iso8601_micro": "2024-03-28T08:49:37.430906Z", "iso8601": "2024-03-28T08:49:37Z", "iso8601_basic": "20240328T084937430906", "iso8601_basic_short": "20240328T084937", "tz": "UTC", "tz_dst": "UTC", "tz_offset": "+0000"}, "ansible_python": {"version": {"major": 3, "minor": 10, "micro": 12, "releaselevel": "final", "serial": 0}, "version_info": [3, 10, 12, "final", 0], "executable": "/usr/bin/python3", "has_sslcontext": true, "type": "cpython"}, "ansible_pkg_mgr": "apt", "ansible_service_mgr": "systemd", "gather_subset": ["all"], "module_setup": true}, "invocation": {"module_args": {"gather_subset": ["all"], "gather_timeout": 10, "filter": [], "fact_path": "/etc/ansible/facts.d"}}}\n', b'')[0m
+[0;32mok: [ubuntu-server][0m
+
+TASK [sonarqube : Check if Docker exists] **************************************
+[1;30mtask path: /root/ansible/sonarqube-lab/sonarqube/tasks/main.yml:10[0m
+[0;34mUsing module file /usr/local/share/pipx/venvs/ansible/lib/python3.10/site-packages/ansible/modules/command.py[0m
+[0;34mPipelining is enabled.[0m
+[0;34m<ubuntu-server> ESTABLISH SSH CONNECTION FOR USER: None[0m
+[0;34m<ubuntu-server> SSH: EXEC ssh -o ControlMaster=auto -o ControlPersist=600s -o StrictHostKeyChecking=no -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o ConnectTimeout=10 -o 'ControlPath="/root/.ansible/cp/%h-%p-%r"' ubuntu-server '/bin/sh -c '"'"'sudo -H -S -n  -u root /bin/sh -c '"'"'"'"'"'"'"'"'echo BECOME-SUCCESS-whgdmzwtmcxwmvjebzzwoqpltotsvkci ; /usr/bin/python3'"'"'"'"'"'"'"'"' && sleep 0'"'"''[0m
+[0;34mEscalation succeeded[0m
+[0;34m<ubuntu-server> (0, b'\n{"changed": true, "stdout": "ii  containerd                             1.7.2-0ubuntu1~22.04.1                     amd64        daemon to control runC\\nii  docker.io                              24.0.5-0ubuntu1~22.04.1                    amd64        Linux container runtime", "stderr": "", "rc": 0, "cmd": "dpkg -l | grep -E \\"docker.io|containerd\\"", "start": "2024-03-28 08:49:38.058941", "end": "2024-03-28 08:49:38.112036", "delta": "0:00:00.053095", "msg": "", "invocation": {"module_args": {"_raw_params": "dpkg -l | grep -E \\"docker.io|containerd\\"", "_uses_shell": true, "expand_argument_vars": true, "stdin_add_newline": true, "strip_empty_ends": true, "argv": null, "chdir": null, "executable": null, "creates": null, "removes": null, "stdin": null}}}\n', b'')[0m
+[0;33mchanged: [ubuntu-server] => {[0m
+[0;33m    "changed": true,[0m
+[0;33m    "cmd": "dpkg -l | grep -E \"docker.io|containerd\"",[0m
+[0;33m    "delta": "0:00:00.053095",[0m
+[0;33m    "end": "2024-03-28 08:49:38.112036",[0m
+[0;33m    "invocation": {[0m
+[0;33m        "module_args": {[0m
+[0;33m            "_raw_params": "dpkg -l | grep -E \"docker.io|containerd\"",[0m
+[0;33m            "_uses_shell": true,[0m
+[0;33m            "argv": null,[0m
+[0;33m            "chdir": null,[0m
+[0;33m            "creates": null,[0m
+[0;33m            "executable": null,[0m
+[0;33m            "expand_argument_vars": true,[0m
+[0;33m            "removes": null,[0m
+[0;33m            "stdin": null,[0m
+[0;33m            "stdin_add_newline": true,[0m
+[0;33m            "strip_empty_ends": true[0m
+[0;33m        }[0m
+[0;33m    },[0m
+[0;33m    "msg": "",[0m
+[0;33m    "rc": 0,[0m
+[0;33m    "start": "2024-03-28 08:49:38.058941",[0m
+[0;33m    "stderr": "",[0m
+[0;33m    "stderr_lines": [],[0m
+[0;33m    "stdout": "ii  containerd                             1.7.2-0ubuntu1~22.04.1                     amd64        daemon to control runC\nii  docker.io                              24.0.5-0ubuntu1~22.04.1                    amd64        Linux container runtime",[0m
+[0;33m    "stdout_lines": [[0m
+[0;33m        "ii  containerd                             1.7.2-0ubuntu1~22.04.1                     amd64        daemon to control runC",[0m
+[0;33m        "ii  docker.io                              24.0.5-0ubuntu1~22.04.1                    amd64        Linux container runtime"[0m
+[0;33m    ][0m
+[0;33m}[0m
+
+TASK [sonarqube : Install Docker] **********************************************
+[1;30mtask path: /root/ansible/sonarqube-lab/sonarqube/tasks/main.yml:15[0m
+[0;36mskipping: [ubuntu-server] => (item=containerd)  => {[0m
+[0;36m    "ansible_loop_var": "item",[0m
+[0;36m    "changed": false,[0m
+[0;36m    "false_condition": "packageCheck.rc != 0",[0m
+[0;36m    "item": "containerd",[0m
+[0;36m    "skip_reason": "Conditional result was False"[0m
+[0;36m}[0m
+[0;36mskipping: [ubuntu-server] => (item=docker.io)  => {[0m
+[0;36m    "ansible_loop_var": "item",[0m
+[0;36m    "changed": false,[0m
+[0;36m    "false_condition": "packageCheck.rc != 0",[0m
+[0;36m    "item": "docker.io",[0m
+[0;36m    "skip_reason": "Conditional result was False"[0m
+[0;36m}[0m
+[0;36mskipping: [ubuntu-server] => {[0m
+[0;36m    "changed": false,[0m
+[0;36m    "msg": "All items skipped"[0m
+[0;36m}[0m
+
+TASK [sonarqube : Pull SonarQube image] ****************************************
+[1;30mtask path: /root/ansible/sonarqube-lab/sonarqube/tasks/main.yml:26[0m
+[0;34mredirecting (type: modules) ansible.builtin.docker_image to community.docker.docker_image[0m
+[0;34mredirecting (type: modules) ansible.builtin.docker_image to community.docker.docker_image[0m
+[0;34mUsing module file /usr/share/ansible/collections/ansible_collections/community/docker/plugins/modules/docker_image.py[0m
+[0;34mPipelining is enabled.[0m
+[0;34m<ubuntu-server> ESTABLISH SSH CONNECTION FOR USER: None[0m
+[0;34m<ubuntu-server> SSH: EXEC ssh -o ControlMaster=auto -o ControlPersist=600s -o StrictHostKeyChecking=no -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o ConnectTimeout=10 -o 'ControlPath="/root/.ansible/cp/%h-%p-%r"' ubuntu-server '/bin/sh -c '"'"'sudo -H -S -n  -u root /bin/sh -c '"'"'"'"'"'"'"'"'echo BECOME-SUCCESS-ibrkdbecbckfpbolbxvvenltqxepobps ; /usr/bin/python3'"'"'"'"'"'"'"'"' && sleep 0'"'"''[0m
+[0;34mEscalation succeeded[0m
+[0;34m<ubuntu-server> (0, b'\n{"changed": false, "actions": [], "image": {"Id": "sha256:4009139ebd1985ba735e70d240fcc40681829273c7759fb3ae52e2ff51fb6a13", "RepoTags": ["sonarqube:8.9-community"], "RepoDigests": ["sonarqube@sha256:eb2f0be32efdf08bef8d7370d09a0b123bc2430ae80e29a07720c9aa68233c00"], "Parent": "", "Comment": "", "Created": "2022-12-19T21:24:19.367592606Z", "Container": "9614a27b56553cc2df81e96fc7ba4e3abd9afd17d9b8e143f86a83e9d5bf4fa8", "ContainerConfig": {"Hostname": "9614a27b5655", "Domainname": "", "User": "", "AttachStdin": false, "AttachStdout": false, "AttachStderr": false, "ExposedPorts": {"9000/tcp": {}}, "Tty": false, "OpenStdin": false, "StdinOnce": false, "Env": ["PATH=/opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin", "JAVA_VERSION=jdk-11.0.11+9", "LANG=en_US.UTF-8", "LANGUAGE=en_US:en", "LC_ALL=en_US.UTF-8", "JAVA_HOME=/opt/java/openjdk", "SONARQUBE_HOME=/opt/sonarqube", "SONAR_VERSION=8.9.10.61524", "SQ_DATA_DIR=/opt/sonarqube/data", "SQ_EXTENSIONS_DIR=/opt/sonarqube/extensions", "SQ_LOGS_DIR=/opt/sonarqube/logs", "SQ_TEMP_DIR=/opt/sonarqube/temp"], "Cmd": ["/bin/sh", "-c", "#(nop) ", "CMD [\\"bin/sonar.sh\\"]"], "Image": "sha256:8fda84f427ce69d826366c0d2aaeb96a09ecc5bdc6d199a5dfadff1b049cc122", "Volumes": null, "WorkingDir": "/opt/sonarqube", "Entrypoint": ["bin/run.sh"], "OnBuild": null, "Labels": {}}, "DockerVersion": "20.10.12", "Author": "", "Config": {"Hostname": "", "Domainname": "", "User": "", "AttachStdin": false, "AttachStdout": false, "AttachStderr": false, "ExposedPorts": {"9000/tcp": {}}, "Tty": false, "OpenStdin": false, "StdinOnce": false, "Env": ["PATH=/opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin", "JAVA_VERSION=jdk-11.0.11+9", "LANG=en_US.UTF-8", "LANGUAGE=en_US:en", "LC_ALL=en_US.UTF-8", "JAVA_HOME=/opt/java/openjdk", "SONARQUBE_HOME=/opt/sonarqube", "SONAR_VERSION=8.9.10.61524", "SQ_DATA_DIR=/opt/sonarqube/data", "SQ_EXTENSIONS_DIR=/opt/sonarqube/extensions", "SQ_LOGS_DIR=/opt/sonarqube/logs", "SQ_TEMP_DIR=/opt/sonarqube/temp"], "Cmd": ["bin/sonar.sh"], "Image": "sha256:8fda84f427ce69d826366c0d2aaeb96a09ecc5bdc6d199a5dfadff1b049cc122", "Volumes": null, "WorkingDir": "/opt/sonarqube", "Entrypoint": ["bin/run.sh"], "OnBuild": null, "Labels": null}, "Architecture": "amd64", "Os": "linux", "Size": 490469645, "VirtualSize": 490469645, "GraphDriver": {"Data": {"LowerDir": "/var/lib/docker/overlay2/ac2a2fd6275a65cad98a8580c568e5e0b4416b9d2d4ecd88da05261f26f0e837/diff:/var/lib/docker/overlay2/6287bc571bf53959ea5a26273038b23a0c321e9c811cd6bb2d6b686b366168f3/diff:/var/lib/docker/overlay2/7c9f52b8177a1130067a0f9963518ab1e1881c3384c2ca6221da8c5b840bc400/diff:/var/lib/docker/overlay2/f0640998db72b1cbf304e0234d2c1f1ee1defff1e50c2c56b11ee4203cccfb12/diff", "MergedDir": "/var/lib/docker/overlay2/79d3eca4cf1f5606fd9c272c5aa0815eb12c6203163f9ac15b9cb97bc713dc8e/merged", "UpperDir": "/var/lib/docker/overlay2/79d3eca4cf1f5606fd9c272c5aa0815eb12c6203163f9ac15b9cb97bc713dc8e/diff", "WorkDir": "/var/lib/docker/overlay2/79d3eca4cf1f5606fd9c272c5aa0815eb12c6203163f9ac15b9cb97bc713dc8e/work"}, "Name": "overlay2"}, "RootFS": {"Type": "layers", "Layers": ["sha256:63493a9ab2d41e319e25dd7474e184d875e28cb267f7e6856ca91dccdd90ee28", "sha256:6418fefcb81bc0b4e50892598ed9b96116ba1d0fdad12aebd043ed74f3f904da", "sha256:49d3183966472e5eeb799d7013e230e9e9f2206cf3f0b3034168bc1d0a6eec7d", "sha256:40806b8eefb3a8e2c4c1b5a82db2801a6859a188c8a702f0eb19bec30e0124fa", "sha256:07d40c0e1143eaa36f0e00a0da4942cc7a2ac6c5aab5c4fb57b2ad2509251df6"]}, "Metadata": {"LastTagTime": "0001-01-01T00:00:00Z"}}, "invocation": {"module_args": {"name": "sonarqube", "source": "pull", "tag": "8.9-community", "docker_host": "unix://var/run/docker.sock", "api_version": "auto", "timeout": 60, "tls": false, "use_ssh_client": false, "validate_certs": false, "debug": false, "force_source": false, "force_absent": false, "force_tag": false, "push": false, "state": "present", "tls_hostname": null, "ca_cert": null, "client_cert": null, "client_key": null, "ssl_version": null, "build": null, "archive_path": null, "load_path": null, "pull": null, "repository": null}}}\n', b'')[0m
+[0;32mok: [ubuntu-server] => {[0m
+[0;32m    "actions": [],[0m
+[0;32m    "changed": false,[0m
+[0;32m    "image": {[0m
+[0;32m        "Architecture": "amd64",[0m
+[0;32m        "Author": "",[0m
+[0;32m        "Comment": "",[0m
+[0;32m        "Config": {[0m
+[0;32m            "AttachStderr": false,[0m
+[0;32m            "AttachStdin": false,[0m
+[0;32m            "AttachStdout": false,[0m
+[0;32m            "Cmd": [[0m
+[0;32m                "bin/sonar.sh"[0m
+[0;32m            ],[0m
+[0;32m            "Domainname": "",[0m
+[0;32m            "Entrypoint": [[0m
+[0;32m                "bin/run.sh"[0m
+[0;32m            ],[0m
+[0;32m            "Env": [[0m
+[0;32m                "PATH=/opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",[0m
+[0;32m                "JAVA_VERSION=jdk-11.0.11+9",[0m
+[0;32m                "LANG=en_US.UTF-8",[0m
+[0;32m                "LANGUAGE=en_US:en",[0m
+[0;32m                "LC_ALL=en_US.UTF-8",[0m
+[0;32m                "JAVA_HOME=/opt/java/openjdk",[0m
+[0;32m                "SONARQUBE_HOME=/opt/sonarqube",[0m
+[0;32m                "SONAR_VERSION=8.9.10.61524",[0m
+[0;32m                "SQ_DATA_DIR=/opt/sonarqube/data",[0m
+[0;32m                "SQ_EXTENSIONS_DIR=/opt/sonarqube/extensions",[0m
+[0;32m                "SQ_LOGS_DIR=/opt/sonarqube/logs",[0m
+[0;32m                "SQ_TEMP_DIR=/opt/sonarqube/temp"[0m
+[0;32m            ],[0m
+[0;32m            "ExposedPorts": {[0m
+[0;32m                "9000/tcp": {}[0m
+[0;32m            },[0m
+[0;32m            "Hostname": "",[0m
+[0;32m            "Image": "sha256:8fda84f427ce69d826366c0d2aaeb96a09ecc5bdc6d199a5dfadff1b049cc122",[0m
+[0;32m            "Labels": null,[0m
+[0;32m            "OnBuild": null,[0m
+[0;32m            "OpenStdin": false,[0m
+[0;32m            "StdinOnce": false,[0m
+[0;32m            "Tty": false,[0m
+[0;32m            "User": "",[0m
+[0;32m            "Volumes": null,[0m
+[0;32m            "WorkingDir": "/opt/sonarqube"[0m
+[0;32m        },[0m
+[0;32m        "Container": "9614a27b56553cc2df81e96fc7ba4e3abd9afd17d9b8e143f86a83e9d5bf4fa8",[0m
+[0;32m        "ContainerConfig": {[0m
+[0;32m            "AttachStderr": false,[0m
+[0;32m            "AttachStdin": false,[0m
+[0;32m            "AttachStdout": false,[0m
+[0;32m            "Cmd": [[0m
+[0;32m                "/bin/sh",[0m
+[0;32m                "-c",[0m
+[0;32m                "#(nop) ",[0m
+[0;32m                "CMD [\"bin/sonar.sh\"]"[0m
+[0;32m            ],[0m
+[0;32m            "Domainname": "",[0m
+[0;32m            "Entrypoint": [[0m
+[0;32m                "bin/run.sh"[0m
+[0;32m            ],[0m
+[0;32m            "Env": [[0m
+[0;32m                "PATH=/opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",[0m
+[0;32m                "JAVA_VERSION=jdk-11.0.11+9",[0m
+[0;32m                "LANG=en_US.UTF-8",[0m
+[0;32m                "LANGUAGE=en_US:en",[0m
+[0;32m                "LC_ALL=en_US.UTF-8",[0m
+[0;32m                "JAVA_HOME=/opt/java/openjdk",[0m
+[0;32m                "SONARQUBE_HOME=/opt/sonarqube",[0m
+[0;32m                "SONAR_VERSION=8.9.10.61524",[0m
+[0;32m                "SQ_DATA_DIR=/opt/sonarqube/data",[0m
+[0;32m                "SQ_EXTENSIONS_DIR=/opt/sonarqube/extensions",[0m
+[0;32m                "SQ_LOGS_DIR=/opt/sonarqube/logs",[0m
+[0;32m                "SQ_TEMP_DIR=/opt/sonarqube/temp"[0m
+[0;32m            ],[0m
+[0;32m            "ExposedPorts": {[0m
+[0;32m                "9000/tcp": {}[0m
+[0;32m            },[0m
+[0;32m            "Hostname": "9614a27b5655",[0m
+[0;32m            "Image": "sha256:8fda84f427ce69d826366c0d2aaeb96a09ecc5bdc6d199a5dfadff1b049cc122",[0m
+[0;32m            "Labels": {},[0m
+[0;32m            "OnBuild": null,[0m
+[0;32m            "OpenStdin": false,[0m
+[0;32m            "StdinOnce": false,[0m
+[0;32m            "Tty": false,[0m
+[0;32m            "User": "",[0m
+[0;32m            "Volumes": null,[0m
+[0;32m            "WorkingDir": "/opt/sonarqube"[0m
+[0;32m        },[0m
+[0;32m        "Created": "2022-12-19T21:24:19.367592606Z",[0m
+[0;32m        "DockerVersion": "20.10.12",[0m
+[0;32m        "GraphDriver": {[0m
+[0;32m            "Data": {[0m
+[0;32m                "LowerDir": "/var/lib/docker/overlay2/ac2a2fd6275a65cad98a8580c568e5e0b4416b9d2d4ecd88da05261f26f0e837/diff:/var/lib/docker/overlay2/6287bc571bf53959ea5a26273038b23a0c321e9c811cd6bb2d6b686b366168f3/diff:/var/lib/docker/overlay2/7c9f52b8177a1130067a0f9963518ab1e1881c3384c2ca6221da8c5b840bc400/diff:/var/lib/docker/overlay2/f0640998db72b1cbf304e0234d2c1f1ee1defff1e50c2c56b11ee4203cccfb12/diff",[0m
+[0;32m                "MergedDir": "/var/lib/docker/overlay2/79d3eca4cf1f5606fd9c272c5aa0815eb12c6203163f9ac15b9cb97bc713dc8e/merged",[0m
+[0;32m                "UpperDir": "/var/lib/docker/overlay2/79d3eca4cf1f5606fd9c272c5aa0815eb12c6203163f9ac15b9cb97bc713dc8e/diff",[0m
+[0;32m                "WorkDir": "/var/lib/docker/overlay2/79d3eca4cf1f5606fd9c272c5aa0815eb12c6203163f9ac15b9cb97bc713dc8e/work"[0m
+[0;32m            },[0m
+[0;32m            "Name": "overlay2"[0m
+[0;32m        },[0m
+[0;32m        "Id": "sha256:4009139ebd1985ba735e70d240fcc40681829273c7759fb3ae52e2ff51fb6a13",[0m
+[0;32m        "Metadata": {[0m
+[0;32m            "LastTagTime": "0001-01-01T00:00:00Z"[0m
+[0;32m        },[0m
+[0;32m        "Os": "linux",[0m
+[0;32m        "Parent": "",[0m
+[0;32m        "RepoDigests": [[0m
+[0;32m            "sonarqube@sha256:eb2f0be32efdf08bef8d7370d09a0b123bc2430ae80e29a07720c9aa68233c00"[0m
+[0;32m        ],[0m
+[0;32m        "RepoTags": [[0m
+[0;32m            "sonarqube:8.9-community"[0m
+[0;32m        ],[0m
+[0;32m        "RootFS": {[0m
+[0;32m            "Layers": [[0m
+[0;32m                "sha256:63493a9ab2d41e319e25dd7474e184d875e28cb267f7e6856ca91dccdd90ee28",[0m
+[0;32m                "sha256:6418fefcb81bc0b4e50892598ed9b96116ba1d0fdad12aebd043ed74f3f904da",[0m
+[0;32m                "sha256:49d3183966472e5eeb799d7013e230e9e9f2206cf3f0b3034168bc1d0a6eec7d",[0m
+[0;32m                "sha256:40806b8eefb3a8e2c4c1b5a82db2801a6859a188c8a702f0eb19bec30e0124fa",[0m
+[0;32m                "sha256:07d40c0e1143eaa36f0e00a0da4942cc7a2ac6c5aab5c4fb57b2ad2509251df6"[0m
+[0;32m            ],[0m
+[0;32m            "Type": "layers"[0m
+[0;32m        },[0m
+[0;32m        "Size": 490469645,[0m
+[0;32m        "VirtualSize": 490469645[0m
+[0;32m    },[0m
+[0;32m    "invocation": {[0m
+[0;32m        "module_args": {[0m
+[0;32m            "api_version": "auto",[0m
+[0;32m            "archive_path": null,[0m
+[0;32m            "build": null,[0m
+[0;32m            "ca_cert": null,[0m
+[0;32m            "client_cert": null,[0m
+[0;32m            "client_key": null,[0m
+[0;32m            "debug": false,[0m
+[0;32m            "docker_host": "unix://var/run/docker.sock",[0m
+[0;32m            "force_absent": false,[0m
+[0;32m            "force_source": false,[0m
+[0;32m            "force_tag": false,[0m
+[0;32m            "load_path": null,[0m
+[0;32m            "name": "sonarqube",[0m
+[0;32m            "pull": null,[0m
+[0;32m            "push": false,[0m
+[0;32m            "repository": null,[0m
+[0;32m            "source": "pull",[0m
+[0;32m            "ssl_version": null,[0m
+[0;32m            "state": "present",[0m
+[0;32m            "tag": "8.9-community",[0m
+[0;32m            "timeout": 60,[0m
+[0;32m            "tls": false,[0m
+[0;32m            "tls_hostname": null,[0m
+[0;32m            "use_ssh_client": false,[0m
+[0;32m            "validate_certs": false[0m
+[0;32m        }[0m
+[0;32m    }[0m
+[0;32m}[0m
+
+TASK [sonarqube : Run SonarQube container] *************************************
+[1;30mtask path: /root/ansible/sonarqube-lab/sonarqube/tasks/main.yml:33[0m
+[0;34mredirecting (type: modules) ansible.builtin.docker_container to community.docker.docker_container[0m
+[0;34mredirecting (type: modules) ansible.builtin.docker_container to community.docker.docker_container[0m
+[0;34mUsing module file /usr/share/ansible/collections/ansible_collections/community/docker/plugins/modules/docker_container.py[0m
+[0;34mPipelining is enabled.[0m
+[0;34m<ubuntu-server> ESTABLISH SSH CONNECTION FOR USER: None[0m
+[0;34m<ubuntu-server> SSH: EXEC ssh -o ControlMaster=auto -o ControlPersist=600s -o StrictHostKeyChecking=no -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o ConnectTimeout=10 -o 'ControlPath="/root/.ansible/cp/%h-%p-%r"' ubuntu-server '/bin/sh -c '"'"'sudo -H -S -n  -u root /bin/sh -c '"'"'"'"'"'"'"'"'echo BECOME-SUCCESS-ikevvflderwmyjchlcuvcsrqdsxtbcbd ; /usr/bin/python3'"'"'"'"'"'"'"'"' && sleep 0'"'"''[0m
+[0;34mEscalation succeeded[0m
+[0;34m<ubuntu-server> (0, b'\n{"changed": false, "container": {"Id": "289cd697a26f684fad8e28d67295f6666a3373627b3f95a8062579eec3519f9c", "Created": "2024-03-27T19:35:04.644104156Z", "Path": "bin/run.sh", "Args": ["bin/sonar.sh"], "State": {"Status": "running", "Running": true, "Paused": false, "Restarting": false, "OOMKilled": false, "Dead": false, "Pid": 141049, "ExitCode": 0, "Error": "", "StartedAt": "2024-03-27T19:35:06.559972749Z", "FinishedAt": "0001-01-01T00:00:00Z"}, "Image": "sha256:4009139ebd1985ba735e70d240fcc40681829273c7759fb3ae52e2ff51fb6a13", "ResolvConfPath": "/var/lib/docker/containers/289cd697a26f684fad8e28d67295f6666a3373627b3f95a8062579eec3519f9c/resolv.conf", "HostnamePath": "/var/lib/docker/containers/289cd697a26f684fad8e28d67295f6666a3373627b3f95a8062579eec3519f9c/hostname", "HostsPath": "/var/lib/docker/containers/289cd697a26f684fad8e28d67295f6666a3373627b3f95a8062579eec3519f9c/hosts", "LogPath": "/var/lib/docker/containers/289cd697a26f684fad8e28d67295f6666a3373627b3f95a8062579eec3519f9c/289cd697a26f684fad8e28d67295f6666a3373627b3f95a8062579eec3519f9c-json.log", "Name": "/sonarqube-dev", "RestartCount": 0, "Driver": "overlay2", "Platform": "linux", "MountLabel": "", "ProcessLabel": "", "AppArmorProfile": "docker-default", "ExecIDs": null, "HostConfig": {"Binds": null, "ContainerIDFile": "", "LogConfig": {"Type": "json-file", "Config": {}}, "NetworkMode": "default", "PortBindings": {"9000/tcp": [{"HostIp": "0.0.0.0", "HostPort": "9000"}]}, "RestartPolicy": {"Name": "", "MaximumRetryCount": 0}, "AutoRemove": false, "VolumeDriver": "", "VolumesFrom": null, "ConsoleSize": [0, 0], "CapAdd": null, "CapDrop": null, "CgroupnsMode": "host", "Dns": null, "DnsOptions": null, "DnsSearch": null, "ExtraHosts": null, "GroupAdd": null, "IpcMode": "private", "Cgroup": "", "Links": null, "OomScoreAdj": 0, "PidMode": "", "Privileged": false, "PublishAllPorts": false, "ReadonlyRootfs": false, "SecurityOpt": null, "UTSMode": "", "UsernsMode": "", "ShmSize": 67108864, "Runtime": "runc", "Isolation": "", "CpuShares": 0, "Memory": 2147483648, "NanoCpus": 0, "CgroupParent": "", "BlkioWeight": 0, "BlkioWeightDevice": null, "BlkioDeviceReadBps": null, "BlkioDeviceWriteBps": null, "BlkioDeviceReadIOps": null, "BlkioDeviceWriteIOps": null, "CpuPeriod": 0, "CpuQuota": 0, "CpuRealtimePeriod": 0, "CpuRealtimeRuntime": 0, "CpusetCpus": "", "CpusetMems": "", "Devices": null, "DeviceCgroupRules": null, "DeviceRequests": null, "MemoryReservation": 0, "MemorySwap": 4294967296, "MemorySwappiness": null, "OomKillDisable": false, "PidsLimit": null, "Ulimits": null, "CpuCount": 0, "CpuPercent": 0, "IOMaximumIOps": 0, "IOMaximumBandwidth": 0, "MaskedPaths": ["/proc/asound", "/proc/acpi", "/proc/kcore", "/proc/keys", "/proc/latency_stats", "/proc/timer_list", "/proc/timer_stats", "/proc/sched_debug", "/proc/scsi", "/sys/firmware"], "ReadonlyPaths": ["/proc/bus", "/proc/fs", "/proc/irq", "/proc/sys", "/proc/sysrq-trigger"]}, "GraphDriver": {"Data": {"LowerDir": "/var/lib/docker/overlay2/42e728ea3bddb88820b8f9ed6540c7f9be772e41e589739dc4f39b956c7ede82-init/diff:/var/lib/docker/overlay2/79d3eca4cf1f5606fd9c272c5aa0815eb12c6203163f9ac15b9cb97bc713dc8e/diff:/var/lib/docker/overlay2/ac2a2fd6275a65cad98a8580c568e5e0b4416b9d2d4ecd88da05261f26f0e837/diff:/var/lib/docker/overlay2/6287bc571bf53959ea5a26273038b23a0c321e9c811cd6bb2d6b686b366168f3/diff:/var/lib/docker/overlay2/7c9f52b8177a1130067a0f9963518ab1e1881c3384c2ca6221da8c5b840bc400/diff:/var/lib/docker/overlay2/f0640998db72b1cbf304e0234d2c1f1ee1defff1e50c2c56b11ee4203cccfb12/diff", "MergedDir": "/var/lib/docker/overlay2/42e728ea3bddb88820b8f9ed6540c7f9be772e41e589739dc4f39b956c7ede82/merged", "UpperDir": "/var/lib/docker/overlay2/42e728ea3bddb88820b8f9ed6540c7f9be772e41e589739dc4f39b956c7ede82/diff", "WorkDir": "/var/lib/docker/overlay2/42e728ea3bddb88820b8f9ed6540c7f9be772e41e589739dc4f39b956c7ede82/work"}, "Name": "overlay2"}, "Mounts": [], "Config": {"Hostname": "289cd697a26f", "Domainname": "", "User": "", "AttachStdin": false, "AttachStdout": true, "AttachStderr": true, "ExposedPorts": {"9000/tcp": {}}, "Tty": false, "OpenStdin": false, "StdinOnce": false, "Env": ["PATH=/opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin", "JAVA_VERSION=jdk-11.0.11+9", "LANG=en_US.UTF-8", "LANGUAGE=en_US:en", "LC_ALL=en_US.UTF-8", "JAVA_HOME=/opt/java/openjdk", "SONARQUBE_HOME=/opt/sonarqube", "SONAR_VERSION=8.9.10.61524", "SQ_DATA_DIR=/opt/sonarqube/data", "SQ_EXTENSIONS_DIR=/opt/sonarqube/extensions", "SQ_LOGS_DIR=/opt/sonarqube/logs", "SQ_TEMP_DIR=/opt/sonarqube/temp"], "Cmd": ["bin/sonar.sh"], "Image": "sonarqube:8.9-community", "Volumes": null, "WorkingDir": "/opt/sonarqube", "Entrypoint": ["bin/run.sh"], "OnBuild": null, "Labels": {}}, "NetworkSettings": {"Bridge": "", "SandboxID": "9a4128c0cacc8e1723221f5e092c1d72a774cf41aa0709bceb9561057d26fcaa", "HairpinMode": false, "LinkLocalIPv6Address": "", "LinkLocalIPv6PrefixLen": 0, "Ports": {"9000/tcp": [{"HostIp": "0.0.0.0", "HostPort": "9000"}]}, "SandboxKey": "/var/run/docker/netns/9a4128c0cacc", "SecondaryIPAddresses": null, "SecondaryIPv6Addresses": null, "EndpointID": "7a43ac057091dc83ae1fd3a6bc3e178e26949568e9c23742f649d66234d61877", "Gateway": "172.17.0.1", "GlobalIPv6Address": "", "GlobalIPv6PrefixLen": 0, "IPAddress": "172.17.0.2", "IPPrefixLen": 16, "IPv6Gateway": "", "MacAddress": "02:42:ac:11:00:02", "Networks": {"bridge": {"IPAMConfig": null, "Links": null, "Aliases": null, "NetworkID": "3bf9f516d0d7237b66dca32b9c3bb746c80cbcd323bb360d513787240ca16f73", "EndpointID": "7a43ac057091dc83ae1fd3a6bc3e178e26949568e9c23742f649d66234d61877", "Gateway": "172.17.0.1", "IPAddress": "172.17.0.2", "IPPrefixLen": 16, "IPv6Gateway": "", "GlobalIPv6Address": "", "GlobalIPv6PrefixLen": 0, "MacAddress": "02:42:ac:11:00:02", "DriverOpts": null}}}}, "invocation": {"module_args": {"name": "sonarqube-dev", "image": "sonarqube:8.9-community", "published_ports": ["9000:9000"], "memory": "2g", "state": "started", "docker_host": "unix://var/run/docker.sock", "api_version": "auto", "timeout": 60, "tls": false, "use_ssh_client": false, "validate_certs": false, "debug": false, "cleanup": false, "container_default_behavior": "no_defaults", "command_handling": "correct", "force_kill": false, "ignore_image": false, "image_comparison": "desired-image", "image_label_mismatch": "ignore", "image_name_mismatch": "ignore", "keep_volumes": true, "networks_cli_compatible": true, "output_logs": false, "pull": false, "purge_networks": false, "recreate": false, "restart": false, "tls_hostname": null, "ca_cert": null, "client_cert": null, "client_key": null, "ssl_version": null, "comparisons": null, "default_host_ip": null, "kill_signal": null, "paused": null, "removal_wait_timeout": null, "auto_remove": null, "blkio_weight": null, "capabilities": null, "cap_drop": null, "cgroupns_mode": null, "cgroup_parent": null, "command": null, "cpu_period": null, "cpu_quota": null, "cpuset_cpus": null, "cpuset_mems": null, "cpu_shares": null, "entrypoint": null, "cpus": null, "detach": null, "interactive": null, "devices": null, "device_read_bps": null, "device_write_bps": null, "device_read_iops": null, "device_write_iops": null, "device_requests": null, "dns_servers": null, "dns_opts": null, "dns_search_domains": null, "domainname": null, "env": null, "env_file": null, "etc_hosts": null, "groups": null, "healthcheck": null, "hostname": null, "init": null, "ipc_mode": null, "kernel_memory": null, "labels": null, "links": null, "log_driver": null, "log_options": null, "mac_address": null, "memory_reservation": null, "memory_swap": null, "memory_swappiness": null, "stop_timeout": null, "network_mode": null, "networks": null, "oom_killer": null, "oom_score_adj": null, "pid_mode": null, "pids_limit": null, "platform": null, "privileged": null, "read_only": null, "restart_policy": null, "restart_retries": null, "runtime": null, "security_opts": null, "shm_size": null, "stop_signal": null, "storage_opts": null, "sysctls": null, "tmpfs": null, "tty": null, "ulimits": null, "user": null, "userns_mode": null, "uts": null, "volume_driver": null, "volumes_from": null, "working_dir": null, "mounts": null, "volumes": null, "exposed_ports": null, "publish_all_ports": null}}}\n', b'')[0m
+[0;32mok: [ubuntu-server] => {[0m
+[0;32m    "changed": false,[0m
+[0;32m    "container": {[0m
+[0;32m        "AppArmorProfile": "docker-default",[0m
+[0;32m        "Args": [[0m
+[0;32m            "bin/sonar.sh"[0m
+[0;32m        ],[0m
+[0;32m        "Config": {[0m
+[0;32m            "AttachStderr": true,[0m
+[0;32m            "AttachStdin": false,[0m
+[0;32m            "AttachStdout": true,[0m
+[0;32m            "Cmd": [[0m
+[0;32m                "bin/sonar.sh"[0m
+[0;32m            ],[0m
+[0;32m            "Domainname": "",[0m
+[0;32m            "Entrypoint": [[0m
+[0;32m                "bin/run.sh"[0m
+[0;32m            ],[0m
+[0;32m            "Env": [[0m
+[0;32m                "PATH=/opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",[0m
+[0;32m                "JAVA_VERSION=jdk-11.0.11+9",[0m
+[0;32m                "LANG=en_US.UTF-8",[0m
+[0;32m                "LANGUAGE=en_US:en",[0m
+[0;32m                "LC_ALL=en_US.UTF-8",[0m
+[0;32m                "JAVA_HOME=/opt/java/openjdk",[0m
+[0;32m                "SONARQUBE_HOME=/opt/sonarqube",[0m
+[0;32m                "SONAR_VERSION=8.9.10.61524",[0m
+[0;32m                "SQ_DATA_DIR=/opt/sonarqube/data",[0m
+[0;32m                "SQ_EXTENSIONS_DIR=/opt/sonarqube/extensions",[0m
+[0;32m                "SQ_LOGS_DIR=/opt/sonarqube/logs",[0m
+[0;32m                "SQ_TEMP_DIR=/opt/sonarqube/temp"[0m
+[0;32m            ],[0m
+[0;32m            "ExposedPorts": {[0m
+[0;32m                "9000/tcp": {}[0m
+[0;32m            },[0m
+[0;32m            "Hostname": "289cd697a26f",[0m
+[0;32m            "Image": "sonarqube:8.9-community",[0m
+[0;32m            "Labels": {},[0m
+[0;32m            "OnBuild": null,[0m
+[0;32m            "OpenStdin": false,[0m
+[0;32m            "StdinOnce": false,[0m
+[0;32m            "Tty": false,[0m
+[0;32m            "User": "",[0m
+[0;32m            "Volumes": null,[0m
+[0;32m            "WorkingDir": "/opt/sonarqube"[0m
+[0;32m        },[0m
+[0;32m        "Created": "2024-03-27T19:35:04.644104156Z",[0m
+[0;32m        "Driver": "overlay2",[0m
+[0;32m        "ExecIDs": null,[0m
+[0;32m        "GraphDriver": {[0m
+[0;32m            "Data": {[0m
+[0;32m                "LowerDir": "/var/lib/docker/overlay2/42e728ea3bddb88820b8f9ed6540c7f9be772e41e589739dc4f39b956c7ede82-init/diff:/var/lib/docker/overlay2/79d3eca4cf1f5606fd9c272c5aa0815eb12c6203163f9ac15b9cb97bc713dc8e/diff:/var/lib/docker/overlay2/ac2a2fd6275a65cad98a8580c568e5e0b4416b9d2d4ecd88da05261f26f0e837/diff:/var/lib/docker/overlay2/6287bc571bf53959ea5a26273038b23a0c321e9c811cd6bb2d6b686b366168f3/diff:/var/lib/docker/overlay2/7c9f52b8177a1130067a0f9963518ab1e1881c3384c2ca6221da8c5b840bc400/diff:/var/lib/docker/overlay2/f0640998db72b1cbf304e0234d2c1f1ee1defff1e50c2c56b11ee4203cccfb12/diff",[0m
+[0;32m                "MergedDir": "/var/lib/docker/overlay2/42e728ea3bddb88820b8f9ed6540c7f9be772e41e589739dc4f39b956c7ede82/merged",[0m
+[0;32m                "UpperDir": "/var/lib/docker/overlay2/42e728ea3bddb88820b8f9ed6540c7f9be772e41e589739dc4f39b956c7ede82/diff",[0m
+[0;32m                "WorkDir": "/var/lib/docker/overlay2/42e728ea3bddb88820b8f9ed6540c7f9be772e41e589739dc4f39b956c7ede82/work"[0m
+[0;32m            },[0m
+[0;32m            "Name": "overlay2"[0m
+[0;32m        },[0m
+[0;32m        "HostConfig": {[0m
+[0;32m            "AutoRemove": false,[0m
+[0;32m            "Binds": null,[0m
+[0;32m            "BlkioDeviceReadBps": null,[0m
+[0;32m            "BlkioDeviceReadIOps": null,[0m
+[0;32m            "BlkioDeviceWriteBps": null,[0m
+[0;32m            "BlkioDeviceWriteIOps": null,[0m
+[0;32m            "BlkioWeight": 0,[0m
+[0;32m            "BlkioWeightDevice": null,[0m
+[0;32m            "CapAdd": null,[0m
+[0;32m            "CapDrop": null,[0m
+[0;32m            "Cgroup": "",[0m
+[0;32m            "CgroupParent": "",[0m
+[0;32m            "CgroupnsMode": "host",[0m
+[0;32m            "ConsoleSize": [[0m
+[0;32m                0,[0m
+[0;32m                0[0m
+[0;32m            ],[0m
+[0;32m            "ContainerIDFile": "",[0m
+[0;32m            "CpuCount": 0,[0m
+[0;32m            "CpuPercent": 0,[0m
+[0;32m            "CpuPeriod": 0,[0m
+[0;32m            "CpuQuota": 0,[0m
+[0;32m            "CpuRealtimePeriod": 0,[0m
+[0;32m            "CpuRealtimeRuntime": 0,[0m
+[0;32m            "CpuShares": 0,[0m
+[0;32m            "CpusetCpus": "",[0m
+[0;32m            "CpusetMems": "",[0m
+[0;32m            "DeviceCgroupRules": null,[0m
+[0;32m            "DeviceRequests": null,[0m
+[0;32m            "Devices": null,[0m
+[0;32m            "Dns": null,[0m
+[0;32m            "DnsOptions": null,[0m
+[0;32m            "DnsSearch": null,[0m
+[0;32m            "ExtraHosts": null,[0m
+[0;32m            "GroupAdd": null,[0m
+[0;32m            "IOMaximumBandwidth": 0,[0m
+[0;32m            "IOMaximumIOps": 0,[0m
+[0;32m            "IpcMode": "private",[0m
+[0;32m            "Isolation": "",[0m
+[0;32m            "Links": null,[0m
+[0;32m            "LogConfig": {[0m
+[0;32m                "Config": {},[0m
+[0;32m                "Type": "json-file"[0m
+[0;32m            },[0m
+[0;32m            "MaskedPaths": [[0m
+[0;32m                "/proc/asound",[0m
+[0;32m                "/proc/acpi",[0m
+[0;32m                "/proc/kcore",[0m
+[0;32m                "/proc/keys",[0m
+[0;32m                "/proc/latency_stats",[0m
+[0;32m                "/proc/timer_list",[0m
+[0;32m                "/proc/timer_stats",[0m
+[0;32m                "/proc/sched_debug",[0m
+[0;32m                "/proc/scsi",[0m
+[0;32m                "/sys/firmware"[0m
+[0;32m            ],[0m
+[0;32m            "Memory": 2147483648,[0m
+[0;32m            "MemoryReservation": 0,[0m
+[0;32m            "MemorySwap": 4294967296,[0m
+[0;32m            "MemorySwappiness": null,[0m
+[0;32m            "NanoCpus": 0,[0m
+[0;32m            "NetworkMode": "default",[0m
+[0;32m            "OomKillDisable": false,[0m
+[0;32m            "OomScoreAdj": 0,[0m
+[0;32m            "PidMode": "",[0m
+[0;32m            "PidsLimit": null,[0m
+[0;32m            "PortBindings": {[0m
+[0;32m                "9000/tcp": [[0m
+[0;32m                    {[0m
+[0;32m                        "HostIp": "0.0.0.0",[0m
+[0;32m                        "HostPort": "9000"[0m
+[0;32m                    }[0m
+[0;32m                ][0m
+[0;32m            },[0m
+[0;32m            "Privileged": false,[0m
+[0;32m            "PublishAllPorts": false,[0m
+[0;32m            "ReadonlyPaths": [[0m
+[0;32m                "/proc/bus",[0m
+[0;32m                "/proc/fs",[0m
+[0;32m                "/proc/irq",[0m
+[0;32m                "/proc/sys",[0m
+[0;32m                "/proc/sysrq-trigger"[0m
+[0;32m            ],[0m
+[0;32m            "ReadonlyRootfs": false,[0m
+[0;32m            "RestartPolicy": {[0m
+[0;32m                "MaximumRetryCount": 0,[0m
+[0;32m                "Name": ""[0m
+[0;32m            },[0m
+[0;32m            "Runtime": "runc",[0m
+[0;32m            "SecurityOpt": null,[0m
+[0;32m            "ShmSize": 67108864,[0m
+[0;32m            "UTSMode": "",[0m
+[0;32m            "Ulimits": null,[0m
+[0;32m            "UsernsMode": "",[0m
+[0;32m            "VolumeDriver": "",[0m
+[0;32m            "VolumesFrom": null[0m
+[0;32m        },[0m
+[0;32m        "HostnamePath": "/var/lib/docker/containers/289cd697a26f684fad8e28d67295f6666a3373627b3f95a8062579eec3519f9c/hostname",[0m
+[0;32m        "HostsPath": "/var/lib/docker/containers/289cd697a26f684fad8e28d67295f6666a3373627b3f95a8062579eec3519f9c/hosts",[0m
+[0;32m        "Id": "289cd697a26f684fad8e28d67295f6666a3373627b3f95a8062579eec3519f9c",[0m
+[0;32m        "Image": "sha256:4009139ebd1985ba735e70d240fcc40681829273c7759fb3ae52e2ff51fb6a13",[0m
+[0;32m        "LogPath": "/var/lib/docker/containers/289cd697a26f684fad8e28d67295f6666a3373627b3f95a8062579eec3519f9c/289cd697a26f684fad8e28d67295f6666a3373627b3f95a8062579eec3519f9c-json.log",[0m
+[0;32m        "MountLabel": "",[0m
+[0;32m        "Mounts": [],[0m
+[0;32m        "Name": "/sonarqube-dev",[0m
+[0;32m        "NetworkSettings": {[0m
+[0;32m            "Bridge": "",[0m
+[0;32m            "EndpointID": "7a43ac057091dc83ae1fd3a6bc3e178e26949568e9c23742f649d66234d61877",[0m
+[0;32m            "Gateway": "172.17.0.1",[0m
+[0;32m            "GlobalIPv6Address": "",[0m
+[0;32m            "GlobalIPv6PrefixLen": 0,[0m
+[0;32m            "HairpinMode": false,[0m
+[0;32m            "IPAddress": "172.17.0.2",[0m
+[0;32m            "IPPrefixLen": 16,[0m
+[0;32m            "IPv6Gateway": "",[0m
+[0;32m            "LinkLocalIPv6Address": "",[0m
+[0;32m            "LinkLocalIPv6PrefixLen": 0,[0m
+[0;32m            "MacAddress": "02:42:ac:11:00:02",[0m
+[0;32m            "Networks": {[0m
+[0;32m                "bridge": {[0m
+[0;32m                    "Aliases": null,[0m
+[0;32m                    "DriverOpts": null,[0m
+[0;32m                    "EndpointID": "7a43ac057091dc83ae1fd3a6bc3e178e26949568e9c23742f649d66234d61877",[0m
+[0;32m                    "Gateway": "172.17.0.1",[0m
+[0;32m                    "GlobalIPv6Address": "",[0m
+[0;32m                    "GlobalIPv6PrefixLen": 0,[0m
+[0;32m                    "IPAMConfig": null,[0m
+[0;32m                    "IPAddress": "172.17.0.2",[0m
+[0;32m                    "IPPrefixLen": 16,[0m
+[0;32m                    "IPv6Gateway": "",[0m
+[0;32m                    "Links": null,[0m
+[0;32m                    "MacAddress": "02:42:ac:11:00:02",[0m
+[0;32m                    "NetworkID": "3bf9f516d0d7237b66dca32b9c3bb746c80cbcd323bb360d513787240ca16f73"[0m
+[0;32m                }[0m
+[0;32m            },[0m
+[0;32m            "Ports": {[0m
+[0;32m                "9000/tcp": [[0m
+[0;32m                    {[0m
+[0;32m                        "HostIp": "0.0.0.0",[0m
+[0;32m                        "HostPort": "9000"[0m
+[0;32m                    }[0m
+[0;32m                ][0m
+[0;32m            },[0m
+[0;32m            "SandboxID": "9a4128c0cacc8e1723221f5e092c1d72a774cf41aa0709bceb9561057d26fcaa",[0m
+[0;32m            "SandboxKey": "/var/run/docker/netns/9a4128c0cacc",[0m
+[0;32m            "SecondaryIPAddresses": null,[0m
+[0;32m            "SecondaryIPv6Addresses": null[0m
+[0;32m        },[0m
+[0;32m        "Path": "bin/run.sh",[0m
+[0;32m        "Platform": "linux",[0m
+[0;32m        "ProcessLabel": "",[0m
+[0;32m        "ResolvConfPath": "/var/lib/docker/containers/289cd697a26f684fad8e28d67295f6666a3373627b3f95a8062579eec3519f9c/resolv.conf",[0m
+[0;32m        "RestartCount": 0,[0m
+[0;32m        "State": {[0m
+[0;32m            "Dead": false,[0m
+[0;32m            "Error": "",[0m
+[0;32m            "ExitCode": 0,[0m
+[0;32m            "FinishedAt": "0001-01-01T00:00:00Z",[0m
+[0;32m            "OOMKilled": false,[0m
+[0;32m            "Paused": false,[0m
+[0;32m            "Pid": 141049,[0m
+[0;32m            "Restarting": false,[0m
+[0;32m            "Running": true,[0m
+[0;32m            "StartedAt": "2024-03-27T19:35:06.559972749Z",[0m
+[0;32m            "Status": "running"[0m
+[0;32m        }[0m
+[0;32m    },[0m
+[0;32m    "invocation": {[0m
+[0;32m        "module_args": {[0m
+[0;32m            "api_version": "auto",[0m
+[0;32m            "auto_remove": null,[0m
+[0;32m            "blkio_weight": null,[0m
+[0;32m            "ca_cert": null,[0m
+[0;32m            "cap_drop": null,[0m
+[0;32m            "capabilities": null,[0m
+[0;32m            "cgroup_parent": null,[0m
+[0;32m            "cgroupns_mode": null,[0m
+[0;32m            "cleanup": false,[0m
+[0;32m            "client_cert": null,[0m
+[0;32m            "client_key": null,[0m
+[0;32m            "command": null,[0m
+[0;32m            "command_handling": "correct",[0m
+[0;32m            "comparisons": null,[0m
+[0;32m            "container_default_behavior": "no_defaults",[0m
+[0;32m            "cpu_period": null,[0m
+[0;32m            "cpu_quota": null,[0m
+[0;32m            "cpu_shares": null,[0m
+[0;32m            "cpus": null,[0m
+[0;32m            "cpuset_cpus": null,[0m
+[0;32m            "cpuset_mems": null,[0m
+[0;32m            "debug": false,[0m
+[0;32m            "default_host_ip": null,[0m
+[0;32m            "detach": null,[0m
+[0;32m            "device_read_bps": null,[0m
+[0;32m            "device_read_iops": null,[0m
+[0;32m            "device_requests": null,[0m
+[0;32m            "device_write_bps": null,[0m
+[0;32m            "device_write_iops": null,[0m
+[0;32m            "devices": null,[0m
+[0;32m            "dns_opts": null,[0m
+[0;32m            "dns_search_domains": null,[0m
+[0;32m            "dns_servers": null,[0m
+[0;32m            "docker_host": "unix://var/run/docker.sock",[0m
+[0;32m            "domainname": null,[0m
+[0;32m            "entrypoint": null,[0m
+[0;32m            "env": null,[0m
+[0;32m            "env_file": null,[0m
+[0;32m            "etc_hosts": null,[0m
+[0;32m            "exposed_ports": null,[0m
+[0;32m            "force_kill": false,[0m
+[0;32m            "groups": null,[0m
+[0;32m            "healthcheck": null,[0m
+[0;32m            "hostname": null,[0m
+[0;32m            "ignore_image": false,[0m
+[0;32m            "image": "sonarqube:8.9-community",[0m
+[0;32m            "image_comparison": "desired-image",[0m
+[0;32m            "image_label_mismatch": "ignore",[0m
+[0;32m            "image_name_mismatch": "ignore",[0m
+[0;32m            "init": null,[0m
+[0;32m            "interactive": null,[0m
+[0;32m            "ipc_mode": null,[0m
+[0;32m            "keep_volumes": true,[0m
+[0;32m            "kernel_memory": null,[0m
+[0;32m            "kill_signal": null,[0m
+[0;32m            "labels": null,[0m
+[0;32m            "links": null,[0m
+[0;32m            "log_driver": null,[0m
+[0;32m            "log_options": null,[0m
+[0;32m            "mac_address": null,[0m
+[0;32m            "memory": "2g",[0m
+[0;32m            "memory_reservation": null,[0m
+[0;32m            "memory_swap": null,[0m
+[0;32m            "memory_swappiness": null,[0m
+[0;32m            "mounts": null,[0m
+[0;32m            "name": "sonarqube-dev",[0m
+[0;32m            "network_mode": null,[0m
+[0;32m            "networks": null,[0m
+[0;32m            "networks_cli_compatible": true,[0m
+[0;32m            "oom_killer": null,[0m
+[0;32m            "oom_score_adj": null,[0m
+[0;32m            "output_logs": false,[0m
+[0;32m            "paused": null,[0m
+[0;32m            "pid_mode": null,[0m
+[0;32m            "pids_limit": null,[0m
+[0;32m            "platform": null,[0m
+[0;32m            "privileged": null,[0m
+[0;32m            "publish_all_ports": null,[0m
+[0;32m            "published_ports": [[0m
+[0;32m                "9000:9000"[0m
+[0;32m            ],[0m
+[0;32m            "pull": false,[0m
+[0;32m            "purge_networks": false,[0m
+[0;32m            "read_only": null,[0m
+[0;32m            "recreate": false,[0m
+[0;32m            "removal_wait_timeout": null,[0m
+[0;32m            "restart": false,[0m
+[0;32m            "restart_policy": null,[0m
+[0;32m            "restart_retries": null,[0m
+[0;32m            "runtime": null,[0m
+[0;32m            "security_opts": null,[0m
+[0;32m            "shm_size": null,[0m
+[0;32m            "ssl_version": null,[0m
+[0;32m            "state": "started",[0m
+[0;32m            "stop_signal": null,[0m
+[0;32m            "stop_timeout": null,[0m
+[0;32m            "storage_opts": null,[0m
+[0;32m            "sysctls": null,[0m
+[0;32m            "timeout": 60,[0m
+[0;32m            "tls": false,[0m
+[0;32m            "tls_hostname": null,[0m
+[0;32m            "tmpfs": null,[0m
+[0;32m            "tty": null,[0m
+[0;32m            "ulimits": null,[0m
+[0;32m            "use_ssh_client": false,[0m
+[0;32m            "user": null,[0m
+[0;32m            "userns_mode": null,[0m
+[0;32m            "uts": null,[0m
+[0;32m            "validate_certs": false,[0m
+[0;32m            "volume_driver": null,[0m
+[0;32m            "volumes": null,[0m
+[0;32m            "volumes_from": null,[0m
+[0;32m            "working_dir": null[0m
+[0;32m        }[0m
+[0;32m    }[0m
+[0;32m}[0m
+
+PLAY RECAP *********************************************************************
+[0;33mubuntu-server[0m              : [0;32mok=6   [0m [0;33mchanged=1   [0m unreachable=0    failed=0    [0;36mskipped=1   [0m rescued=0    ignored=0   
+

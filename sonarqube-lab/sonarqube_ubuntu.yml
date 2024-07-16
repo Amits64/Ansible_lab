@@ -4,6 +4,6 @@
   gather_facts: yes
   ignore_errors: yes
   vars:
-    ansible_python_interpreter: /var/lib/python
+    ansible_python_interpreter: /usr/bin/python3
   roles:
     - sonarqube

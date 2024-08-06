@@ -69,7 +69,7 @@ This project is licensed under the MIT License. See the LICENSE file for details
 
 ## Contact
 
-For help or questions, email [your-email@example.com](mailto:your-email@example.com).
+For help or questions, email [Amit Singh](mailto:chauhanamit090@hotmaail.com).
 
 ### Notes:
 - Update the repository URL, IP addresses, and email with your specific details.

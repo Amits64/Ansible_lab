@@ -1,5 +1,5 @@
 ---
-- hosts: dev
+- hosts: k8s
   become: yes
   gather_facts: yes
   ignore_errors: yes

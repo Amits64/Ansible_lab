@@ -1,9 +1,14 @@
 [dev]
-ubuntu-server
+ubuntu-server ansible_python_interpreter=/usr/bin/python3.8
 
 [qa]
 centos7-server
 
 [prod]
 rhel8-server 
-rhel8-server ansible_python_interpreter=/usr/bin/python3.6
+rhel8-server ansible_python_interpreter=/usr/bin/python3.8
+
+[k8s]
+k8s-cp ansible_python_interpreter=/usr/bin/python3.8
+node-1 ansible_python_interpreter=/usr/bin/python3.8
+node-2 ansible_python_interpreter=/usr/bin/python3.8

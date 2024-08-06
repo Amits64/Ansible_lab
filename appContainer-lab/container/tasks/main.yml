@@ -58,7 +58,7 @@
     published_ports:
       - "8000:8000"
     memory: "4g"
-    state: started
+    state: stopped
     env:
       SPLUNK_START_ARGS: "--accept-license"
       SPLUNK_PASSWORD: "Password1!"
@@ -70,7 +70,7 @@
     command: redis-server --appendonly yes
     published_ports:
       - "6379:6379"
-    state: started
+    state: stopped
 
 - name: Run Jenkins container
   docker_container:
@@ -81,4 +81,4 @@
       - "50000:50000"
     volumes:
       - "jenkins_volume:/var/jenkins_home"
-    state: started
+    state: stopped

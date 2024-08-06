@@ -1,4 +1,11 @@
-[webserver]
-web01 ansible_host=192.168.1.10
-web02 ansible_host=192.168.10.11
-web03 ansible_host=192.168.10.12
+[all]
+k8s-cp ansible_python_interpreter=/usr/bin/python3.8
+node-1 ansible_python_interpreter=/usr/bin/python3.8
+node-2 ansible_python_interpreter=/usr/bin/python3.8
+
+[k8s-master]
+k8s-cp
+
+[k8s-nodes]
+node-1
+node-2

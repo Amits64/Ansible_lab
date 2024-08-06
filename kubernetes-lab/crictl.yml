@@ -1,66 +1,68 @@
 ---
-# tasks file for container
-- name: Update all packages
-  apt:
-    upgrade: dist
+- hosts: all
+  become: true
+  tasks:
+    - name: Update all packages
+      apt:
+        upgrade: dist
 
-- name: Check if crictl exists
-  shell: which crictl
-  register: crictlCheck
-  ignore_errors: yes
+    - name: Check if crictl exists
+      shell: which crictl
+      register: crictlCheck
+      ignore_errors: yes
 
-- name: Ensure crictl is installed
-  apt:
-    name: crictl
-    state: present
-    update_cache: yes
-  when: crictlCheck.rc != 0 
+    - name: Ensure crictl is installed
+      apt:
+        name: crictl
+        state: present
+        update_cache: yes
+      when: crictlCheck.rc != 0 
 
-- name: Check if container runtime (containerd) exists
-  shell: dpkg -l | grep -E "containerd"
-  register: containerdCheck
-  ignore_errors: yes
+    - name: Check if container runtime (containerd) exists
+      shell: dpkg -l | grep -E "containerd"
+      register: containerdCheck
+      ignore_errors: yes
 
-- name: Ensure container runtime (containerd) is installed
-  apt:
-    name: containerd
-    state: present
-    update_cache: yes
-  when: containerdCheck.rc != 0 
+    - name: Ensure container runtime (containerd) is installed
+      apt:
+        name: containerd
+        state: present
+        update_cache: yes
+      when: containerdCheck.rc != 0 
 
-# Pull images using crictl
-- name: Pull SonarQube image
-  shell: crictl pull sonarqube:8.9-community
+    # Pull images using crictl
+    - name: Pull SonarQube image
+      shell: crictl pull sonarqube:8.9-community
 
-- name: Pull Splunk enterprise image
-  shell: crictl pull splunk/splunk:latest
+    - name: Pull Splunk enterprise image
+      shell: crictl pull splunk/splunk:latest
 
-- name: Pull Redis image
-  shell: crictl pull redis:7.2.4
+    - name: Pull Redis image
+      shell: crictl pull redis:7.2.4
 
-- name: Pull Jenkins image
-  shell: crictl pull jenkins/jenkins:lts
+    - name: Pull Jenkins image
+      shell: crictl pull jenkins/jenkins:lts
 
-# Run containers using crictl
-- name: Run SonarQube container
-  shell: |
-    crictl create --name sonarqube-dev --image sonarqube:8.9-community --ports "9000:9000" --memory 2g
-    crictl start sonarqube-dev
+    # Run containers using crictl
+    - name: Run SonarQube container
+      shell: |
+        crictl create --name sonarqube-dev --image sonarqube:8.9-community --ports "9000:9000" --memory 2g
+        crictl start sonarqube-dev
 
-- name: Run Splunk container
-  shell: |
-    crictl create --name splunk-dev --image splunk/splunk:latest --ports "8000:8000" --memory 4g --env SPLUNK_START_ARGS="--accept-license" --env SPLUNK_PASSWORD="Password1!"
-    crictl start splunk-dev
-  ignore_errors: yes
+    - name: Run Splunk container
+      shell: |
+        crictl create --name splunk-dev --image splunk/splunk:latest --ports "8000:8000" --memory 4g --env SPLUNK_START_ARGS="--accept-license" --env SPLUNK_PASSWORD="Password1!"
+        crictl start splunk-dev
+      ignore_errors: yes
 
-- name: Run Redis container
-  shell: |
-    crictl create --name redis-dev --image redis:7.2.4 --command "redis-server --appendonly yes" --ports "6379:6379"
-    crictl start redis-dev
-  ignore_errors: yes
+    - name: Run Redis container
+      shell: |
+        crictl create --name redis-dev --image redis:7.2.4 --command "redis-server --appendonly yes" --ports "6379:6379"
+        crictl start redis-dev
+      ignore_errors: yes
 
-- name: Run Jenkins container
-  shell: |
-    crictl create --name jenkins-dev --image jenkins/jenkins:lts --ports "8080:8080,50000:50000" --mount type=bind,source=jenkins_volume,target=/var/jenkins_home
-    crictl start jenkins-dev
-  ignore_errors: yes
+    - name: Run Jenkins container
+      shell: |
+        crictl create --name jenkins-dev --image jenkins/jenkins:lts --ports "8080:8080,50000:50000" --mount type=bind,source=jenkins_volume,target=/var/jenkins_home
+        crictl start jenkins-dev
+      ignore_errors: yes
